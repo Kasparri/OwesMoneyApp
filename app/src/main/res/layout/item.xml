@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="40dp"
+              android:orientation="horizontal">
 
 
     <!-- TextView with layout weight of 1 out of 4 -->
     <TextView
+        android:id="@+id/item_name"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:id="@+id/item_name"
-        android:gravity="left"
-        />
+        android:layout_weight="0.6"/>
+
+    <!-- Button with layout weight of 1 out of 4 -->
+    <Button
+        android:id="@+id/edit_item"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.15"/>
+
+    <!-- Button with layout weight of 1 out of 4 -->
+    <Button
+        android:id="@+id/delete_item"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.15"/>
+
+    <!-- Checkbox with layout weight of 1 out of 4 -->
+    <CheckBox
+        android:id="@+id/item_done"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.10"/>
 
 </LinearLayout>
