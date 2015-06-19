@@ -21,7 +21,6 @@ public class MainActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         // Create a new AddBillingListAdapter for this ListActivity's ListView
         mAdapter = new AddBillingListAdapter(getApplicationContext());
@@ -43,8 +42,6 @@ public class MainActivity extends ListActivity {
         footerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //Implement OnClick().
 
                 Intent intent = new Intent(MainActivity.this, OverviewOfBillingActivity.class);
                 startActivityForResult(intent,ADD_BILLING_ITEM_REQUEST);
