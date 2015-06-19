@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">OwesMoneyApp</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="add_new_billing">Click here to add a new billing</string>
     <string name="action_settings">Settings</string>
+
 </resources>

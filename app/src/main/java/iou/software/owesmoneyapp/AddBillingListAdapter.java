@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,15 +16,16 @@ import java.util.*;
 /**
  * Created by Kasper on 19/06/15.
  */
-public class ListAdapter extends BaseAdapter {
+public class AddBillingListAdapter extends BaseAdapter {
 
     private final List<Billing> mBillings = new ArrayList<Billing>();
     private final Context mContext;
 
 
-    public ListAdapter(Context context) {
+    public AddBillingListAdapter(Context context) {
         mContext = context;
     }
+
 
     // Add a Billing to the adapter
     // Notify observers that the data set has changed
@@ -33,7 +35,8 @@ public class ListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    // Clears the list adapter of all items.
+
+    // Clears the list adapter of all billings.
 
     public void clear() {
         mBillings.clear();
@@ -41,7 +44,7 @@ public class ListAdapter extends BaseAdapter {
     }
 
 
-    // Returns the number of Items
+    // Returns the number of billings
 
     @Override
     public int getCount() {
@@ -49,20 +52,16 @@ public class ListAdapter extends BaseAdapter {
     }
 
 
-    // Retrieve the number of Items
+    // Retrieve the Billing of a certain number
 
     @Override
     public Object getItem(int pos) {
         return mBillings.get(pos);
     }
 
-
-    // Get the ID for the Billing
-    // In this case it's just the position
-
     @Override
-    public long getItemId(int pos) {
-        return pos;
+    public long getItemId(int position) {
+        return position;
     }
 
 
@@ -74,9 +73,9 @@ public class ListAdapter extends BaseAdapter {
         final Billing billing = mBillings.get(position);
 
         LayoutInflater mInflater = LayoutInflater.from(mContext);
-        convertView = mInflater.inflate(R.layout.billing, parent, false);
+        convertView = mInflater.inflate(R.layout.billing_item, parent, false);
 
-        RelativeLayout itemLayout = (RelativeLayout) convertView;
+        LinearLayout itemLayout = (LinearLayout) convertView;
 
         // Fill in specific Billing data
         // Remember that the data that goes in this View
@@ -87,7 +86,7 @@ public class ListAdapter extends BaseAdapter {
         titleView.setText(Billing.getTitle());
 
 
-        final CheckBox billingStatus = (CheckBox) itemLayout.findViewById(R.id.billing_done);
+        final CheckBox billingStatus = (CheckBox) itemLayout.findViewById(R.id.billing_checkbox);
         billingStatus.setChecked(billing.getStatus());
 
 

@@ -28,7 +28,7 @@
 
     <!-- Checkbox with layout weight of 1 out of 4 -->
     <CheckBox
-        android:id="@+id/billing_done"
+        android:id="@+id/billing_checkbox"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.10"/>
