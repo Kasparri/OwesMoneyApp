@@ -7,28 +7,28 @@
 
     <!-- TextView with layout weight of 1 out of 4 -->
     <TextView
-        android:id="@+id/item_name"
+        android:id="@+id/billing_name"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.6"/>
 
     <!-- Button with layout weight of 1 out of 4 -->
     <Button
-        android:id="@+id/edit_item"
+        android:id="@+id/edit_billing"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.15"/>
 
     <!-- Button with layout weight of 1 out of 4 -->
     <Button
-        android:id="@+id/delete_item"
+        android:id="@+id/delete_billing"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.15"/>
 
     <!-- Checkbox with layout weight of 1 out of 4 -->
     <CheckBox
-        android:id="@+id/item_done"
+        android:id="@+id/billing_done"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.10"/>
