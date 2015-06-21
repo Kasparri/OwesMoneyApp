@@ -24,6 +24,7 @@
         />
 
     <EditText
+        android:id="@+id/enter_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -49,6 +50,7 @@
         />
 
     <EditText
+        android:id="@+id/enter_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
@@ -74,6 +76,7 @@
         />
 
     <EditText
+        android:id="@+id/enter_amount_paid"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
