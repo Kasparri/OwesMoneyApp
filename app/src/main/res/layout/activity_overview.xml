@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Outermost  LinearLayout with vertical orientation -->
+<LinearLayout
+    android:id="@+id/Linear_Layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:layout_gravity="top">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/total_string"
+                android:id="@+id/total_amount"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/total_money"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/total_amount"
+                android:layout_toEndOf="@+id/total_amount"
+                android:layout_marginLeft="40dp"
+                android:layout_marginStart="40dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/dkk_string"
+                android:id="@+id/dkk_total"
+                android:layout_alignTop="@+id/total_money"
+                android:layout_toRightOf="@+id/total_money"
+                android:layout_toEndOf="@+id/total_money" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/average_string"
+                android:id="@+id/average_amount"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/average_money"
+                android:layout_marginLeft="27dp"
+                android:layout_marginStart="27dp"
+                android:layout_alignTop="@+id/average_amount"
+                android:layout_toRightOf="@+id/average_amount"
+                android:layout_toEndOf="@+id/average_amount" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/dkk_string"
+                android:id="@+id/dkk_average"
+                android:layout_alignTop="@+id/average_money"
+                android:layout_toRightOf="@+id/average_money"
+                android:layout_toEndOf="@+id/average_money" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:id="@+id/listView"
+        android:layout_weight="10" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/summarize_billing_string"
+        android:id="@+id/summarize_button"
+        android:layout_weight="0.1"
+        android:layout_gravity="bottom|center_horizontal" />
+
+</LinearLayout>
