@@ -29,6 +29,7 @@ public class OverviewOfBillingActivity extends Activity {
 
     private static TextView mTotalAmountView;
     private static TextView mAverageAmountView;
+    private static TextView mBillingNameView;
     private ListView mListView;
 
     PersonListAdapter mAdapter;
@@ -42,6 +43,8 @@ public class OverviewOfBillingActivity extends Activity {
         mTotalAmountView.setText(""+mTotalAmount);
         mAverageAmountView = (TextView) findViewById(R.id.average_money);
         mAverageAmountView.setText(""+mAverageAmount);
+        mBillingNameView = (TextView) findViewById(R.id.billing_name_overview);
+        mBillingNameView.setText("Load stuff from somewhere");
         mListView = (ListView) findViewById(R.id.listView);
 
         // Create a new PersonListAdapter

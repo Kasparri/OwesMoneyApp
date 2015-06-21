@@ -15,6 +15,12 @@
         android:layout_weight="0.5"
         android:layout_gravity="top">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/billing_name_overview" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
