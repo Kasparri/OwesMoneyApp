@@ -23,6 +23,7 @@ public class SummaryActivity extends Activity {
 
     private static TextView mTotalAmountView;
     private static TextView mAverageAmountView;
+    private static TextView mTitleView;
     private static View mSeperatorView;
     private ListView mListView;
 
@@ -44,6 +45,8 @@ public class SummaryActivity extends Activity {
 
         mTotalAmount=complex.calculateTotal(personList);
         mAverageAmount=complex.calculateMean(personList);
+
+        mTitleView = (TextView) findViewById(R.id.title);
 
         mTotalAmountView = (TextView) findViewById(R.id.total_money);
         mTotalAmountView.setText("" + mTotalAmount);
@@ -72,7 +75,7 @@ public class SummaryActivity extends Activity {
                 //Iterate over every person sending an sms to each one
                 for (int i=0;i<complex.getTransactions1().size();i++) {
                     String phonenumber = complex.getTransactions1().get(i).getOwes().getPhoneNumber();
-                    String message =complex.getTransactionStrings().get(i);
+                    String message =complex.getTransactionStrings().get(i)+"("+complex.getTransactions1().get(i).getTakes().getPhoneNumber()+")";
                     sendSMS(phonenumber, message);
                 }
             }
