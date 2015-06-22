@@ -4,8 +4,10 @@ package iou.software.owesmoneyapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,6 +22,9 @@ import android.widget.TextView;
 
 import android.util.Log;
 import android.view.MenuItem;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
@@ -43,12 +48,22 @@ public class OverviewOfBillingActivity extends Activity {
     private static TextView mBillingNameView;
     private ListView mListView;
 
+    List<Billing> billings;
+    Billing mBilling;
+    final Gson gson = new Gson();
+    SharedPreferences pManager;
+
     PersonListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
+
+        //Preperations for gson array
+        pManager = PreferenceManager.getDefaultSharedPreferences(OverviewOfBillingActivity.this);
+        billings = gson.fromJson(pManager.getString("BILLING","[]"), new TypeToken<List<Billing>>() {}.getType());
+
 
         mTotalAmountView = (TextView) findViewById(R.id.total_money);
         mTotalAmountView.setText(""+mTotalAmount);
@@ -106,8 +121,19 @@ public class OverviewOfBillingActivity extends Activity {
         mSummarizeButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                Billing newBilling = new Billing(TITLE,true,mAdapter.getPersons());
+
+                   //Saves the billing into the array.
+                    billings.add(newBilling);
+                    String s = gson.toJson(billings);
+                    pManager.edit().putString("BILLING",s).apply();
+                    Log.i(TAG, "Saved items");
+
+
+
                 Intent addIntent = new Intent(OverviewOfBillingActivity.this,SummaryActivity.class);
                 startActivity(addIntent);
+
             }
         });
     }
@@ -152,8 +178,8 @@ public class OverviewOfBillingActivity extends Activity {
         Log.i("TAG", ""+mAdapter.getCount());
 
         //Update the views
-        mTotalAmountView.setText(""+mTotalAmount);
-        mAverageAmountView.setText(""+mAverageAmount);
+        mTotalAmountView.setText("" + mTotalAmount);
+        mAverageAmountView.setText("" + mAverageAmount);
     }
 
     @Override
@@ -212,14 +238,17 @@ public class OverviewOfBillingActivity extends Activity {
     // Save PersonItems to file
     private void saveItems() {
 
-        Log.i(TAG, "Saved items");
+
+
+
+
     }
 
     //PersonListAdapter
 
     public class PersonListAdapter extends BaseAdapter {
 
-        private final List<Person> persons = new ArrayList<>();
+        private final ArrayList<Person> persons = new ArrayList<>();
         private final Context mContext;
         private static final int ADD_PERSON_REQUEST = 1;
 
@@ -229,6 +258,11 @@ public class OverviewOfBillingActivity extends Activity {
 
             mContext = context;
 
+        }
+
+
+        public ArrayList<Person> getPersons(){
+            return persons;
         }
 
         // Add a PersonItem to the adapter
