@@ -91,7 +91,8 @@
         android:layout_marginTop="10dp"
         android:hint="Enter amount paid"
         android:inputType="number"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:text="0"/>
 
     <Button
         android:id="@+id/submit_button"

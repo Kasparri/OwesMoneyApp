@@ -53,8 +53,7 @@ public class AddPersonActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String emptyString = "";
-                SharedPreferences pManager = PreferenceManager.getDefaultSharedPreferences(AddPersonActivity.this);
-                persons = gson.fromJson(pManager.getString("PERSON","[]"), new TypeToken<List<Person>>() {}.getType());
+
                 //Getting strings from TextEdits and checks if data is inserted.
                 if (!(mName.getText().toString().equals(emptyString))  && !(mNumber.getText().toString().equals(emptyString))
                         && !(mAmountPaid.getText().toString().equals(emptyString))) {
@@ -65,15 +64,6 @@ public class AddPersonActivity extends Activity {
                     String amountPaidString = mAmountPaid.getText().toString();
                     //Parsing the string to int.
                     int amountPaid = Integer.parseInt(amountPaidString);
-
-
-                   /*
-                    Gson stuff
-                    persons.add(newPerson);
-                    String  s = gson.toJson(persons);
-                    pManager.edit().putString("PERSON",s).apply();
-                    Log.i("Hello", "Person created");
-                    */
 
 
                     // packages an intent with the data acquired

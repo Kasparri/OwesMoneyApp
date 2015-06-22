@@ -17,12 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -168,28 +170,6 @@ public class MainActivity extends ListActivity {
     }
 
     @Override
-    protected void onStart(){
-        super.onStart();
-
-        updateView();
-    }
-
-
-    @Override
-    protected void onPause(){
-        super.onPause();
-
-
-    }
-
-    @Override
-    protected void onResume(){
-        super.onResume();
-
-
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -251,6 +231,12 @@ public class MainActivity extends ListActivity {
             notifyDataSetChanged();
         }
 
+        public void remove(Billing billing) {
+
+            mBillings.remove(billing);
+            notifyDataSetChanged();
+
+        }
 
         // Returns the number of billings
 
@@ -300,12 +286,29 @@ public class MainActivity extends ListActivity {
 
                     String json = new Gson().toJson(billing);
 
-                    intent.putExtra(JSON,json);
+                    intent.putExtra(JSON, json);
 
                     startActivity(intent);
                 }
 
             });
+
+
+
+            final Button deleteButton = (Button) itemLayout.findViewById(R.id.delete_billing);
+            deleteButton.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v){
+
+                    Toast.makeText(mContext,billing.getTitle() + " was removed", Toast.LENGTH_SHORT).show();
+                    mAdapter.remove(billing);
+
+
+                }
+
+            });
+
 
 
             final CheckBox billingStatus = (CheckBox) itemLayout.findViewById(R.id.billing_checkbox);
