@@ -76,14 +76,14 @@ public class MainActivity extends ListActivity {
 
 
                 // sets its title and message
-                popup.setTitle("Set name of billing");
-                popup.setMessage("Insert the name of the billing in the text box below:");
+                popup.setTitle(R.string.popup_title);
+                popup.setMessage(R.string.popup_message);
 
 
                 // makes the EditText field that is to be added to the popup window
                 final EditText titleName = new EditText(mContext);
                 titleName.setTextColor(Color.BLACK);
-                titleName.setHint("billing name");
+                titleName.setHint(R.string.popup_textEdit_hint);
 
                 // adds it
                 popup.setView(titleName);
@@ -91,14 +91,14 @@ public class MainActivity extends ListActivity {
 
                 // sets the Confirm button
 
-                popup.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                popup.setPositiveButton(R.string.popup_confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                         // sets a default name, if no name is entered
 
                         if (titleName.getText().toString().isEmpty()){
-                            titleName.setText("Default Billing");
+                            titleName.setText(R.string.popup_default_name);
                         }
 
                         // starts Overview of Billing activity
@@ -112,7 +112,7 @@ public class MainActivity extends ListActivity {
 
                 // sets the cancel button
 
-                popup.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                popup.setNegativeButton(R.string.popup_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -162,6 +162,10 @@ public class MainActivity extends ListActivity {
         super.onListItemClick(l, v, position, id);
 
     }
+
+
+
+    // internal ListAdapter class
 
     public class AddBillingListAdapter extends BaseAdapter {
 

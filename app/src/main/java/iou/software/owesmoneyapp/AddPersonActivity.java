@@ -33,8 +33,6 @@ public class AddPersonActivity extends Activity {
         setContentView(R.layout.add_new_person);
 
 
-
-
         //Getting the EditText views
         mName = (EditText)findViewById(R.id.enter_name);
         mNumber = (EditText)findViewById(R.id.enter_number);
@@ -82,8 +80,8 @@ public class AddPersonActivity extends Activity {
                     finish();
 
                 }else {
-                    //Tells user to fill in all fields in case the user didnt.
-                    Toast.makeText(getApplicationContext(), "Please fill in all fields!", Toast.LENGTH_LONG).show();
+                    //Tells user to fill in all fields in case the user didn't.
+                    Toast.makeText(getApplicationContext(), R.string.add_person_toast_message, Toast.LENGTH_LONG).show();
                 }
             }
 

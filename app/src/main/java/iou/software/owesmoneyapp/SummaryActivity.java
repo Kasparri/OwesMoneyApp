@@ -23,7 +23,6 @@ public class SummaryActivity extends Activity {
 
     private static TextView mTotalAmountView;
     private static TextView mAverageAmountView;
-    private static TextView mTitleView;
     private static View mSeperatorView;
     private ListView mListView;
 
@@ -46,7 +45,6 @@ public class SummaryActivity extends Activity {
         mTotalAmount=complex.calculateTotal(personList);
         mAverageAmount=complex.calculateMean(personList);
 
-        mTitleView = (TextView) findViewById(R.id.title);
 
         mTotalAmountView = (TextView) findViewById(R.id.total_money);
         mTotalAmountView.setText("" + mTotalAmount);
