@@ -25,7 +25,7 @@ import java.util.List;
 import iou.software.owesmoneyapp.Person;
 
 
-public class Summary extends Activity {
+public class SummaryActivity extends Activity {
 
     private static int mTotalAmount = 0;
     private static int mAverageAmount = 0;

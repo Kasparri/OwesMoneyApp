@@ -3,7 +3,7 @@ package iou.software.owesmoneyapp;
 /**
  * Created by August on 19/06/15.
  */
-public class Person {
+public class Person implements Comparable {
     private String personName, phoneNumber;
     private int amountPaid;
 
@@ -14,6 +14,15 @@ public class Person {
         this.amountPaid = amountPaid;
     }
 
+    public String toString(){
+        return "( " + personName + ", " + phoneNumber + ", " + amountPaid + " )";;
+    }
+
+    @Override
+    public int compareTo(Object person){
+        int compareAmountPaid = ((Person)person).getAmountPaid();
+        return compareAmountPaid - this.amountPaid;
+    }
 
     // Getters
     public String getPersonName() {
@@ -41,4 +50,5 @@ public class Person {
     public void setAmountPaid(int amountPaid) {
         this.amountPaid = amountPaid;
     }
+
 }

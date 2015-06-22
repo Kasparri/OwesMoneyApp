@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import iou.software.owesmoneyapp.Person;
-
 /**
  * Created by Mads on 6/21/2015.
  */
