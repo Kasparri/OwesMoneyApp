@@ -32,7 +32,7 @@
     <string name="add_person_toast_message">Please fill in all fields!</string>
 
     <!-- Overview Activity -->
-    <string name="no_persons_toast">You have to add persons to the billing</string>
+    <string name="no_persons_toast">You have to add at least 2 people to the billing</string>
 
     <!-- Billing item xml -->
     <string name="delete_button">Delete</string>

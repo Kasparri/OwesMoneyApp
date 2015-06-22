@@ -130,7 +130,7 @@ public class OverviewOfBillingActivity extends Activity {
                 // if there is none, show a toast
                 // if there is any added, go to the summary activity
 
-                if (mAdapter.getPersons().isEmpty()) {
+                if (mAdapter.getPersons().isEmpty() || mAdapter.getCount() ==1) {
                     Toast.makeText(getApplicationContext(), R.string.no_persons_toast, Toast.LENGTH_LONG).show();
                 } else {
 
