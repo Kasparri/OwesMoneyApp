@@ -145,15 +145,22 @@ public class MainActivity extends ListActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ADD_BILLING_ITEM_REQUEST && resultCode == RESULT_OK){
 
-
+            // getting the JSON string from the intent
             String json = data.getStringExtra(JSON);
 
+            // retrieving the billing from the JSON string
             Billing billing = new Gson().fromJson(json,Billing.class);
 
-
+            // adding the billing to the view
             mAdapter.add(billing);
 
+            // making a new intent that redirects the user to the summary activity
             Intent toSummary = new Intent(MainActivity.this, SummaryActivity.class);
+
+            // adds the json string to the intent
+            toSummary.putExtra(JSON,json);
+
+            // starts the summary activity with the 'toSummary' intent
             startActivity(toSummary);
         }
 
@@ -289,7 +296,11 @@ public class MainActivity extends ListActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(MainActivity.this, SummaryActivity.class);
-                    Billing.packageIntent(intent, billing.getTitle(), billing.getStatus());
+
+                    String json = new Gson().toJson(billing);
+
+                    intent.putExtra(JSON,json);
+
                     startActivity(intent);
                 }
 

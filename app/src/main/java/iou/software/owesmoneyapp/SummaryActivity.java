@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +20,7 @@ import java.util.List;
 
 public class SummaryActivity extends Activity {
 
+    public final static String JSON = "JSON";
     private static int mTotalAmount = 0;
     private static int mAverageAmount = 0;
 
@@ -34,22 +37,24 @@ public class SummaryActivity extends Activity {
         setContentView(R.layout.activity_summary);
 
         //List
-        Person maren = new Person("Maren","5556",10);
+        /*Person maren = new Person("Maren","5556",10);
         Person jon = new Person("Jon","5554",100);
         Person maibohm = new Person("Maibohm","21563759",10);
-        Person sami = new Person("Sami","51147616",100);
+        Person sami = new Person("Sami","51147616",100);*/
 
-        final ArrayList<Person> personList = new ArrayList<>();
-        personList.add(maren);
-        personList.add(jon);
-        //personList.add(sami);
-        //personList.add(maibohm);
+
+        String json = getIntent().getStringExtra(JSON);
+
+        Billing billing = new Gson().fromJson(json, Billing.class);
+
+
+        final List<Person> personList = billing.getPersons();
 
 
         final ComplexAlgorithm complex = new ComplexAlgorithm();
 
-        mTotalAmount=complex.calculateTotal(personList);
-        mAverageAmount=complex.calculateMean(personList);
+        mTotalAmount=complex.calculateTotal((ArrayList<Person>) personList);
+        mAverageAmount=complex.calculateMean((ArrayList<Person>) personList);
 
 
         mTotalAmountView = (TextView) findViewById(R.id.total_money);
@@ -62,7 +67,7 @@ public class SummaryActivity extends Activity {
 
         mListView = (ListView) findViewById(R.id.listView);
 
-        complex.calculateTransactions(personList);
+        complex.calculateTransactions((ArrayList<Person>) personList);
 
         mAdapter = new TransactionsAdapter(getApplicationContext(),complex.getTransactions1());
         mListView.setAdapter(mAdapter);
@@ -103,8 +108,7 @@ public class SummaryActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //Return to main
-                Intent addIntent = new Intent(SummaryActivity.this,MainActivity.class);
-                startActivity(addIntent);
+                finish();
             }
 
         });

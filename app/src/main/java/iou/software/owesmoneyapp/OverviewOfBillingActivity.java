@@ -196,7 +196,6 @@ public class OverviewOfBillingActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
-
         // Load saved PersonItems, if necessary
 
         if (mAdapter.getCount() == 0){
