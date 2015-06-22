@@ -17,12 +17,12 @@ import java.util.List;
 public class TransactionsAdapter extends ArrayAdapter<Transactions> {
 
     private LayoutInflater inflater;
-    List<Transactions> values;
+    Boolean solo;
 
-    public TransactionsAdapter(Context context, List<Transactions> values){
+    public TransactionsAdapter(Context context, List<Transactions> values, boolean solo){
         super(context,R.layout.row_item,R.id.rowTextView,values);
         inflater = LayoutInflater.from(context);
-        this.values=values;
+        this.solo=solo;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class TransactionsAdapter extends ArrayAdapter<Transactions> {
         });
         checkBox.setTag(transaction);
         checkBox.setChecked(false);
-        if (values.size()==1) {
+        if (solo) {
             textView.setText("There is only one person in the billing, no transactions required");
         } else {
             textView.setText(transaction.getOwes().getPersonName() + " owes " + transaction.getTransaction() + " to " + transaction.getTakes().getPersonName());
