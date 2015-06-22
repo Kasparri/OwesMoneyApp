@@ -17,10 +17,12 @@ import java.util.List;
 public class TransactionsAdapter extends ArrayAdapter<Transactions> {
 
     private LayoutInflater inflater;
+    List<Transactions> values;
 
     public TransactionsAdapter(Context context, List<Transactions> values){
         super(context,R.layout.row_item,R.id.rowTextView,values);
         inflater = LayoutInflater.from(context);
+        this.values=values;
     }
 
     @Override
@@ -47,7 +49,11 @@ public class TransactionsAdapter extends ArrayAdapter<Transactions> {
         });
         checkBox.setTag(transaction);
         checkBox.setChecked(false);
-        textView.setText(transaction.getOwes().getPersonName()+" owes "+transaction.getTransaction()+" to "+transaction.getTakes().getPersonName());
+        if (values.size()==1) {
+            textView.setText("There is only one person in the billing, no transactions required");
+        } else {
+            textView.setText(transaction.getOwes().getPersonName() + " owes " + transaction.getTransaction() + " to " + transaction.getTakes().getPersonName());
+        }
         return convertView;
     }
 }

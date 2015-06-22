@@ -37,12 +37,6 @@ public class SummaryActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
 
-        //List
-        /*Person maren = new Person("Maren","5556",10);
-        Person jon = new Person("Jon","5554",100);
-        Person maibohm = new Person("Maibohm","21563759",10);
-        Person sami = new Person("Sami","51147616",100);*/
-
 
         String json = getIntent().getStringExtra(JSON);
 
