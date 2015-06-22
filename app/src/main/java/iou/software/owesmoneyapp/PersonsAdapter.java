@@ -1,4 +1,4 @@
-package com.example.mads.summary;
+package iou.software.owesmoneyapp;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -25,7 +25,7 @@ public class PersonsAdapter extends ArrayAdapter<Person> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Person person = (Person) this.getItem(position);
+        Person person = this.getItem(position);
         CheckBox checkBox;
         TextView textView;
         if (convertView==null) {

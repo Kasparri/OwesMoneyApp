@@ -1,5 +1,6 @@
 package iou.software.owesmoneyapp;
 
+import android.content.Intent;
 import android.widget.Button;
 import android.widget.CheckBox;
 
@@ -8,23 +9,34 @@ import android.widget.CheckBox;
  */
 public class Billing {
 
-    private static String title;
-    private CheckBox checkBox;
-    private Button editButton;
-    private Button deleteButton;
 
-    public static String getTitle() {
+    public final static String TITLE = "title";
+    public final static String STATUS = "status";
+
+    private String title;
+    private boolean status;
+
+
+    public Billing(Intent intent) {
+        title = intent.getStringExtra(TITLE);
+        status = intent.getBooleanExtra(Billing.STATUS, false);
+    }
+
+    public String getTitle() {
         return title;
-
     }
 
     public boolean getStatus() {
-        return checkBox.isChecked();
+        return status;
     }
 
 
+    public static void packageIntent(Intent intent, String title, boolean status) {
 
+        intent.putExtra(TITLE, title);
+        intent.putExtra(STATUS, status);
 
+    }
 
 
 }

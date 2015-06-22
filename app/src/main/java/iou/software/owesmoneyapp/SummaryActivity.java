@@ -1,4 +1,4 @@
-package com.example.mads.summary;
+package iou.software.owesmoneyapp;
 
 import android.app.Activity;
 import android.app.ListActivity;
@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class Summary extends Activity {
+public class SummaryActivity extends Activity {
 
     private static int mTotalAmount = 0;
     private static int mAverageAmount = 0;
@@ -48,7 +48,7 @@ public class Summary extends Activity {
         Person mads = new Person("Mads","45880974",190);
         Person jens = new Person("Jens","24660202",0);
         Person[] persons = {mads,jens};
-        List<Person> personlist = new ArrayList<Person>();
+        List<Person> personlist = new ArrayList<>();
         personlist.addAll(Arrays.asList(persons));
 
         mAdapter = new PersonsAdapter(getApplicationContext(),personlist);
@@ -62,7 +62,7 @@ public class Summary extends Activity {
         /*mSummarizeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addIntent = new Intent(Summary.this,AddPeopleActivity.class);
+                Intent addIntent = new Intent(SummaryActivity.this,AddPeopleActivity.class);
                 startActivity(addIntent);
             }
 
