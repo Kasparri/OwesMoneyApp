@@ -60,13 +60,24 @@ public class SummaryActivity extends Activity {
 
         mListView.setFooterDividersEnabled(true);
 
-        //Button
+        //Summarize Button
         final Button mSummarizeButton = (Button) findViewById(R.id.notify_button);
         mSummarizeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Iterate over every person sending an sms to each one
-                sendSMS(personList.get(0).getPhoneNumber(),personList.get(0).getPersonName());
+                sendSMS(personList.get(0).getPhoneNumber(), personList.get(0).getPersonName());
+            }
+
+        });
+        //Back button
+        final Button mBackButton = (Button) findViewById(R.id.back_button);
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Return to main
+                Intent addIntent = new Intent(SummaryActivity.this,MainActivity.class);
+                startActivity(addIntent);
             }
 
         });

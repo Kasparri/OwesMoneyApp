@@ -108,5 +108,12 @@
         android:id="@+id/notify_button"
         android:layout_weight="0.1"
         android:layout_gravity="bottom|center_horizontal" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back_to_main"
+        android:id="@+id/back_button"
+        android:layout_weight="0.2"
+        android:layout_gravity="bottom|center_horizontal" />
 
 </LinearLayout>

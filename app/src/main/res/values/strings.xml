@@ -16,5 +16,6 @@
     <string name="delete_string">Delete</string>
     <string name="add_new_person_to_billing_string">Add New Person To Billing</string>
     <string name="send_sms">Notify everyone by SMS</string>
+    <string name="back_to_main">Return to overview</string>
 
 </resources>
