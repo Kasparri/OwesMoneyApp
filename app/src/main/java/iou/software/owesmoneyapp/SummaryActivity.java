@@ -51,10 +51,10 @@ public class SummaryActivity extends Activity {
         Person mads = new Person("Mads","45880974",190);
         Person jens = new Person("Jens","24660202",0);
         Person[] persons = {mads,jens};
-        final List<Person> personlist = new ArrayList<>();
-        personlist.addAll(Arrays.asList(persons));
+        final List<Person> personList = new ArrayList<>();
+        personList.addAll(Arrays.asList(persons));
 
-        mAdapter = new PersonsAdapter(getApplicationContext(),personlist);
+        mAdapter = new PersonsAdapter(getApplicationContext(),personList);
         mListView.setAdapter(mAdapter);
 
 
@@ -66,7 +66,7 @@ public class SummaryActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //Iterate over every person sending an sms to each one
-                sendSMS(personlist.get(0).getPhoneNumber(),personlist.get(0).getPersonName());
+                sendSMS(personList.get(0).getPhoneNumber(),personList.get(0).getPersonName());
             }
 
         });
