@@ -46,7 +46,6 @@ public class SummaryActivity extends Activity {
 
         final List<Person> personList = billing.getPersons();
 
-        Boolean solo = personList.size()==1;
 
         final ComplexAlgorithm complex = new ComplexAlgorithm();
 
@@ -68,8 +67,12 @@ public class SummaryActivity extends Activity {
 
         complex.calculateTransactions((ArrayList<Person>) personList);
 
-        mAdapter = new TransactionsAdapter(getApplicationContext(),complex.getTransactions1(),solo);
+        mAdapter = new TransactionsAdapter(getApplicationContext(),complex.getTransactions1());
         mListView.setAdapter(mAdapter);
+
+        if (personList.size()==1) {
+            TextView solo = (TextView) findViewById(R.id.solo);
+        }
 
 
 
