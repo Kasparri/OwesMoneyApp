@@ -41,23 +41,26 @@ public class SummaryActivity extends Activity {
         personList.add(jens);
 
         ComplexAlgorithm complex = new ComplexAlgorithm();
-        complex.calculateTransactions(personList);
 
         mTotalAmount=complex.calculateTotal(personList);
         mAverageAmount=complex.calculateMean(personList);
 
-        mAdapter = new TransactionsAdapter(getApplicationContext(),complex.getTransactions1());
-        mListView.setAdapter(mAdapter);
-
         mTotalAmountView = (TextView) findViewById(R.id.total_money);
-        mTotalAmountView.setText(""+mTotalAmount);
+        mTotalAmountView.setText("" + mTotalAmount);
 
         mAverageAmountView = (TextView) findViewById(R.id.average_money);
-        mAverageAmountView.setText(""+mAverageAmount);
+        mAverageAmountView.setText("" + mAverageAmount);
 
         mSeperatorView = (View) findViewById(R.id.seperator);
 
         mListView = (ListView) findViewById(R.id.listView);
+
+        complex.calculateTransactions(personList);
+
+        mAdapter = new TransactionsAdapter(getApplicationContext(),complex.getTransactions1());
+        mListView.setAdapter(mAdapter);
+
+
 
 
 

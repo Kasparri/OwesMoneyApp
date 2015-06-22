@@ -26,7 +26,7 @@ public class TransactionsAdapter extends ArrayAdapter<Transactions> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Transactions transaction = this.getItem(position);
-        CheckBox checkBox;
+        final CheckBox checkBox;
         TextView textView;
         if (convertView==null) {
             convertView = inflater.inflate(R.layout.row_item, null);
@@ -39,6 +39,12 @@ public class TransactionsAdapter extends ArrayAdapter<Transactions> {
             checkBox=viewHolder.getCheckBox();
             textView=viewHolder.getTextView();
         }
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkBox.setChecked(!checkBox.isChecked());
+            }
+        });
         checkBox.setTag(transaction);
         checkBox.setChecked(false);
         textView.setText(transaction.getOwes().getPersonName()+" owes "+transaction.getTransaction()+" to "+transaction.getTakes().getPersonName());

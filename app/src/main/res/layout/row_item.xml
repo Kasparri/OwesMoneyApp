@@ -8,6 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:textColor="@color/gray"
         android:textSize="16sp" >
     </TextView>
 
@@ -15,7 +16,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:background="@color/gray"
         android:layout_alignParentRight="true" android:layout_marginRight="6sp"
         android:focusable="false">
     </CheckBox>
