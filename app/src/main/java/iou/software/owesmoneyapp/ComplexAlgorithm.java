@@ -84,7 +84,8 @@ public class ComplexAlgorithm {
     @SuppressWarnings("unchecked")
     public void calculateTransactions(ArrayList<Person> friendsPayment) {
 
-        this.transactions = new ArrayList<>();
+        this.transactions = new ArrayList<String>();
+        this.transactions1 = new ArrayList<Transactions>();
 
         whoOwesWhoTakes(friendsPayment);
 
