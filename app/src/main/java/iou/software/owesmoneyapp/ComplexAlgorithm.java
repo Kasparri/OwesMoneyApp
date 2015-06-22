@@ -8,6 +8,7 @@ import java.util.Collections;
  */
 public class ComplexAlgorithm {
 
+    /*
     public static void main(String[] args) {
         ArrayList<Person> friends = new ArrayList<>();
         friends.add(new Person("Sami", "51147616", 0));
@@ -25,6 +26,7 @@ public class ComplexAlgorithm {
         complex.calculateTransactions(friends);
         System.out.println(complex.transactionStrings);
     }
+    */
 
     //Field
     private ArrayList<Person> friends;

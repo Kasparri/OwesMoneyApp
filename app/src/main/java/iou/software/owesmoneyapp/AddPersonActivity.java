@@ -10,6 +10,7 @@ import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -111,8 +112,9 @@ public class AddPersonActivity extends Activity {
             }
             if (cursor.moveToFirst()) {
                 String phonenumber = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NAME_RAW_CONTACT_ID));
-                System.out.println("Phonenumber=" + phonenumber + " and name=" + name);
+                String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                mName.setText(name, TextView.BufferType.EDITABLE);
+                mNumber.setText(phonenumber,TextView.BufferType.EDITABLE);
             }
         }
     }

@@ -100,7 +100,7 @@
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:id="@+id/seperator"
-        android:layout_weight="0.3"
+        android:layout_weight="0"
         android:background="@color/gray"
         />
 
