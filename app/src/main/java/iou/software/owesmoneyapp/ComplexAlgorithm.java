@@ -97,8 +97,8 @@ public class ComplexAlgorithm {
                     int diff = taker.getAmountPaid() + giver.getAmountPaid();
                     System.out.println(diff);
                     if (diff == 0) {
-                        transactionStrings.add(giver.getPersonName() + " owes " + giver.getAmountPaid() +
-                                " to " + taker.getPersonName());
+                        transactionStrings.add("You owe " + giver.getAmountPaid() +
+                                "DKK to " + taker.getPersonName());
                         transactions1.add(new Transactions(giver,taker,giver.getAmountPaid()));
                         takesMoney.remove(i);
                         givesMoney.remove(j);
@@ -120,8 +120,8 @@ public class ComplexAlgorithm {
 
             //If takesMost needs more money than givesMost owes
             if ( diff < 0) {
-                transactionStrings.add(givesMost.getPersonName() + " owes " + givesMost.getAmountPaid() +
-                        " to " + takesMost.getPersonName());
+                transactionStrings.add("You owe " + givesMost.getAmountPaid() +
+                        "DKK to " + takesMost.getPersonName());
                 transactions1.add(new Transactions(givesMost,takesMost,givesMost.getAmountPaid()));
 
                 takesMost.setAmountPaid(diff);
@@ -131,8 +131,8 @@ public class ComplexAlgorithm {
 
             //If givesMost owes more money than takesMost needs
             else {
-                transactionStrings.add(givesMost.getPersonName() + " owes " + (takesMost.getAmountPaid() * -1) +
-                        " to " + takesMost.getPersonName());
+                transactionStrings.add("You owe " + (takesMost.getAmountPaid() * -1) +
+                        "DKK to " + takesMost.getPersonName());
                 transactions1.add(new Transactions(givesMost,takesMost,takesMost.getAmountPaid()));
                 givesMost.setAmountPaid(diff);
                 Collections.sort(givesMoney);
@@ -145,6 +145,10 @@ public class ComplexAlgorithm {
 
     public ArrayList<Transactions> getTransactions1() {
         return transactions1;
+    }
+
+    public ArrayList<String> getTransactionStrings() {
+        return transactionStrings;
     }
 }
 

@@ -35,12 +35,12 @@ public class SummaryActivity extends Activity {
 
         //List
         Person mads = new Person("Mads","45880974",190);
-        Person jens = new Person("Jens","24660202",0);
+        Person jens = new Person("Jens","5554",0);
         final ArrayList<Person> personList = new ArrayList<>();
         personList.add(mads);
         personList.add(jens);
 
-        ComplexAlgorithm complex = new ComplexAlgorithm();
+        final ComplexAlgorithm complex = new ComplexAlgorithm();
 
         mTotalAmount=complex.calculateTotal(personList);
         mAverageAmount=complex.calculateMean(personList);
@@ -65,12 +65,16 @@ public class SummaryActivity extends Activity {
 
 
         //Summarize Button
-        final Button mSummarizeButton = (Button) findViewById(R.id.notify_button);
-        mSummarizeButton.setOnClickListener(new View.OnClickListener() {
+        final Button mSendButton = (Button) findViewById(R.id.notify_button);
+        mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Iterate over every person sending an sms to each one
-                sendSMS(personList.get(0).getPhoneNumber(), personList.get(0).getPersonName());
+                for (int i=0;i<complex.getTransactions1().size();i++) {
+                    String phonenumber = complex.getTransactions1().get(i).getOwes().getPhoneNumber();
+                    String message =complex.getTransactionStrings().get(i);
+                    sendSMS(phonenumber, message);
+                }
             }
 
         });
@@ -98,6 +102,7 @@ public class SummaryActivity extends Activity {
     public void sendSMS (String phonenumber, String message) {
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(phonenumber, null, message, null, null);
+
     }
 
     @Override
