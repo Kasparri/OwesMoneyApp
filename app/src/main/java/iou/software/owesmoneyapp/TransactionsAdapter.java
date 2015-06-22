@@ -39,7 +39,7 @@ public class TransactionsAdapter extends ArrayAdapter<Transactions> {
             checkBox=viewHolder.getCheckBox();
             textView=viewHolder.getTextView();
         }
-        textView.setOnClickListener(new View.OnClickListener() {
+        convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkBox.setChecked(!checkBox.isChecked());
