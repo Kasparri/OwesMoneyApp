@@ -1,4 +1,4 @@
-package com.example.mads.summary;
+package iou.software.owesmoneyapp;
 
 import android.widget.CheckBox;
 import android.widget.TextView;

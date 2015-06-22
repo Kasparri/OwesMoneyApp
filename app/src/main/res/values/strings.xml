@@ -15,6 +15,6 @@
     <string name="average_string">Average:</string>
     <string name="delete_string">Delete</string>
     <string name="add_new_person_to_billing_string">Add New Person To Billing</string>
-
+    <string name="send_sms">Notify everyone by SMS</string>
 
 </resources>
