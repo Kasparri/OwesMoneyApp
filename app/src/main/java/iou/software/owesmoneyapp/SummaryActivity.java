@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -74,16 +75,6 @@ public class SummaryActivity extends Activity {
 
 
 
-        //Mobilepay Button
-        final Button mMobilepayButton = (Button) findViewById(R.id.notify_button);
-        mMobilepayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Iterate over every person sending an sms to each one
-
-            }
-
-        });
 
         //Summarize Button
         final Button mSendButton = (Button) findViewById(R.id.notify_button);
@@ -98,6 +89,7 @@ public class SummaryActivity extends Activity {
                     String message3 = " MobilePay for iPhone: https://goo.gl/pMCTVS";
 
                     sendSMS(phonenumber, message + message2 + message3);
+
                 }
             }
 

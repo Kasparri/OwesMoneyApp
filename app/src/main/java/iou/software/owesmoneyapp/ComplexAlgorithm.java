@@ -135,7 +135,7 @@ public class ComplexAlgorithm {
             else {
                 transactionStrings.add("You owe " + (takesMost.getAmountPaid() * -1) +
                         "DKK to " + takesMost.getPersonName());
-                transactions1.add(new Transactions(givesMost,takesMost,takesMost.getAmountPaid()*(-1)));
+                transactions1.add(new Transactions(givesMost,takesMost,takesMost.getAmountPaid()*-1));
                 givesMost.setAmountPaid(diff);
                 Collections.sort(givesMoney);
                 takesMoney.remove(takesMost);
