@@ -9,7 +9,7 @@ import java.util.Collections;
 public class ComplexAlgorithm {
 
     public static void main(String[] args) {
-        ArrayList<Person> friends = new ArrayList<Person>();
+        ArrayList<Person> friends = new ArrayList<>();
         friends.add(new Person("Sami", "51147616", 0));
         friends.add(new Person("Maibohm", "51147616", 0));
         friends.add(new Person("August", "51147617", 3));
@@ -23,7 +23,7 @@ public class ComplexAlgorithm {
 //		System.out.println(complex.balanceIsZero);
 
         complex.calculateTransactions(friends);
-        System.out.println(complex.transactions);
+        System.out.println(complex.transactionStrings);
     }
 
     //Field
@@ -31,7 +31,7 @@ public class ComplexAlgorithm {
     private ArrayList<Person> takesMoney;
     private ArrayList<Person> givesMoney;
     private ArrayList<Person> balanceIsZero;
-    private ArrayList<String> transactions;
+    private ArrayList<String> transactionStrings;
     private ArrayList<Transactions> transactions1;
 
     public void testdata() {
@@ -41,7 +41,7 @@ public class ComplexAlgorithm {
         friends.add(new Person("Engberg", "51147618", 0));
     }
 
-    private int calculateTotal(ArrayList<Person> friends) {
+    public int calculateTotal(ArrayList<Person> friends) {
         int sum = 0;
         if (!friends.isEmpty()) {
             for (int i = 0; i < friends.size(); i++) {
@@ -51,7 +51,7 @@ public class ComplexAlgorithm {
         return sum;
     }
 
-    private int calculateMean(ArrayList<Person> friends) {
+    public int calculateMean(ArrayList<Person> friends) {
         return calculateTotal(friends) / friends.size();
     }
 
@@ -84,7 +84,8 @@ public class ComplexAlgorithm {
     @SuppressWarnings("unchecked")
     public void calculateTransactions(ArrayList<Person> friendsPayment) {
 
-        this.transactions = new ArrayList<>();
+        this.transactionStrings = new ArrayList<>();
+        this.transactions1 = new ArrayList<>();
 
         whoOwesWhoTakes(friendsPayment);
 
@@ -96,8 +97,8 @@ public class ComplexAlgorithm {
                     int diff = taker.getAmountPaid() + giver.getAmountPaid();
                     System.out.println(diff);
                     if (diff == 0) {
-                        transactions.add(giver.getPersonName() + " owes " + giver.getAmountPaid() +
-                                " to " + taker.getPersonName());
+                        transactionStrings.add("You owe " + giver.getAmountPaid() +
+                                "DKK to " + taker.getPersonName());
                         transactions1.add(new Transactions(giver,taker,giver.getAmountPaid()));
                         takesMoney.remove(i);
                         givesMoney.remove(j);
@@ -119,8 +120,8 @@ public class ComplexAlgorithm {
 
             //If takesMost needs more money than givesMost owes
             if ( diff < 0) {
-                transactions.add(givesMost.getPersonName() + " owes " + givesMost.getAmountPaid() +
-                        " to " + takesMost.getPersonName());
+                transactionStrings.add("You owe " + givesMost.getAmountPaid() +
+                        "DKK to " + takesMost.getPersonName());
                 transactions1.add(new Transactions(givesMost,takesMost,givesMost.getAmountPaid()));
 
                 takesMost.setAmountPaid(diff);
@@ -130,8 +131,8 @@ public class ComplexAlgorithm {
 
             //If givesMost owes more money than takesMost needs
             else {
-                transactions.add(givesMost.getPersonName() + " owes " + (takesMost.getAmountPaid()*-1) +
-                        " to " + takesMost.getPersonName());
+                transactionStrings.add("You owe " + (takesMost.getAmountPaid() * -1) +
+                        "DKK to " + takesMost.getPersonName());
                 transactions1.add(new Transactions(givesMost,takesMost,takesMost.getAmountPaid()));
                 givesMost.setAmountPaid(diff);
                 Collections.sort(givesMoney);
@@ -142,6 +143,13 @@ public class ComplexAlgorithm {
 
     }
 
+    public ArrayList<Transactions> getTransactions1() {
+        return transactions1;
+    }
+
+    public ArrayList<String> getTransactionStrings() {
+        return transactionStrings;
+    }
 }
 
 

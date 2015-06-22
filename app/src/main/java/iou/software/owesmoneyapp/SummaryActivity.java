@@ -1,28 +1,19 @@
 package iou.software.owesmoneyapp;
 
 import android.app.Activity;
-import android.app.ListActivity;
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import iou.software.owesmoneyapp.Person;
 
 
 public class SummaryActivity extends Activity {
@@ -32,41 +23,58 @@ public class SummaryActivity extends Activity {
 
     private static TextView mTotalAmountView;
     private static TextView mAverageAmountView;
+    private static View mSeperatorView;
     private ListView mListView;
 
-    PersonsAdapter mAdapter;
+    TransactionsAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
 
-        mTotalAmountView = (TextView) findViewById(R.id.total_money);
-        mTotalAmountView.setText(""+mTotalAmount);
-        mAverageAmountView = (TextView) findViewById(R.id.average_money);
-        mAverageAmountView.setText(""+mAverageAmount);
-        mListView = (ListView) findViewById(R.id.listView);
-
         //List
         Person mads = new Person("Mads","45880974",190);
-        Person jens = new Person("Jens","24660202",0);
-        Person[] persons = {mads,jens};
-        final List<Person> personList = new ArrayList<>();
-        personList.addAll(Arrays.asList(persons));
+        Person jens = new Person("Jens","5554",0);
+        final ArrayList<Person> personList = new ArrayList<>();
+        personList.add(mads);
+        personList.add(jens);
 
-        mAdapter = new PersonsAdapter(getApplicationContext(),personList);
+        final ComplexAlgorithm complex = new ComplexAlgorithm();
+
+        mTotalAmount=complex.calculateTotal(personList);
+        mAverageAmount=complex.calculateMean(personList);
+
+        mTotalAmountView = (TextView) findViewById(R.id.total_money);
+        mTotalAmountView.setText("" + mTotalAmount);
+
+        mAverageAmountView = (TextView) findViewById(R.id.average_money);
+        mAverageAmountView.setText("" + mAverageAmount);
+
+        mSeperatorView = (View) findViewById(R.id.seperator);
+
+        mListView = (ListView) findViewById(R.id.listView);
+
+        complex.calculateTransactions(personList);
+
+        mAdapter = new TransactionsAdapter(getApplicationContext(),complex.getTransactions1());
         mListView.setAdapter(mAdapter);
 
 
-        mListView.setFooterDividersEnabled(true);
+
+
 
         //Summarize Button
-        final Button mSummarizeButton = (Button) findViewById(R.id.notify_button);
-        mSummarizeButton.setOnClickListener(new View.OnClickListener() {
+        final Button mSendButton = (Button) findViewById(R.id.notify_button);
+        mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Iterate over every person sending an sms to each one
-                sendSMS(personList.get(0).getPhoneNumber(), personList.get(0).getPersonName());
+                for (int i=0;i<complex.getTransactions1().size();i++) {
+                    String phonenumber = complex.getTransactions1().get(i).getOwes().getPhoneNumber();
+                    String message =complex.getTransactionStrings().get(i);
+                    sendSMS(phonenumber, message);
+                }
             }
 
         });
@@ -94,6 +102,7 @@ public class SummaryActivity extends Activity {
     public void sendSMS (String phonenumber, String message) {
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(phonenumber, null, message, null, null);
+
     }
 
     @Override

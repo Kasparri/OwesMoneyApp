@@ -95,6 +95,15 @@
         </RelativeLayout>
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:id="@+id/seperator"
+        android:layout_weight="0.3"
+        android:background="@color/gray"
+        />
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
