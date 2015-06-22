@@ -110,13 +110,6 @@
         android:id="@+id/listView"
         android:layout_weight="10" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/mobilepay"
-        android:id="@+id/mobilepay"
-        android:layout_weight="0.1"
-        android:layout_gravity="bottom|center_horizontal" />
 
     <Button
         android:layout_width="wrap_content"
