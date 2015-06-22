@@ -19,7 +19,7 @@ public class OverviewOfBillingActivity extends Activity {
 
     private static final String TAG = "ActivityOverview";
 
-    private static final int ADD_PERSON_REQUEST = 0;
+    private static final int ADD_PERSON_REQUEST = 1;
 
     private static final int MENU_DELETE = Menu.FIRST;
     private static final int MENU_BACK = Menu.FIRST + 1;
@@ -95,7 +95,7 @@ public class OverviewOfBillingActivity extends Activity {
         mSummarizeButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addIntent = new Intent(OverviewOfBillingActivity.this,AddPeopleActivity.class);
+                Intent addIntent = new Intent(OverviewOfBillingActivity.this,SummaryActivity.class);
                 startActivity(addIntent);
             }
         });

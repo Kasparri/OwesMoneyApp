@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +21,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import iou.software.owesmoneyapp.Person;
 
 
 public class SummaryActivity extends Activity {
@@ -48,26 +51,37 @@ public class SummaryActivity extends Activity {
         Person mads = new Person("Mads","45880974",190);
         Person jens = new Person("Jens","24660202",0);
         Person[] persons = {mads,jens};
-        List<Person> personlist = new ArrayList<>();
-        personlist.addAll(Arrays.asList(persons));
+        final List<Person> personList = new ArrayList<>();
+        personList.addAll(Arrays.asList(persons));
 
-        mAdapter = new PersonsAdapter(getApplicationContext(),personlist);
+        mAdapter = new PersonsAdapter(getApplicationContext(),personList);
         mListView.setAdapter(mAdapter);
 
 
         mListView.setFooterDividersEnabled(true);
 
-        //Button
+        //Summarize Button
         final Button mSummarizeButton = (Button) findViewById(R.id.notify_button);
-        /*mSummarizeButton.setOnClickListener(new View.OnClickListener() {
+        mSummarizeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addIntent = new Intent(SummaryActivity.this,AddPeopleActivity.class);
+                //Iterate over every person sending an sms to each one
+                sendSMS(personList.get(0).getPhoneNumber(), personList.get(0).getPersonName());
+            }
+
+        });
+        //Back button
+        final Button mBackButton = (Button) findViewById(R.id.back_button);
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Return to main
+                Intent addIntent = new Intent(SummaryActivity.this,MainActivity.class);
                 startActivity(addIntent);
             }
 
         });
-         */
+
     }
 
     @Override
@@ -76,6 +90,10 @@ public class SummaryActivity extends Activity {
         getMenuInflater().inflate(R.menu.menu_summary, menu);
         return true;
 
+    }
+    public void sendSMS (String phonenumber, String message) {
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage(phonenumber, null, message, null, null);
     }
 
     @Override

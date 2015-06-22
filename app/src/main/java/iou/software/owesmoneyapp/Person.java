@@ -15,8 +15,7 @@ public class Person implements Comparable {
     }
 
     public String toString(){
-        String outString = "( " + personName + ", " + phoneNumber + ", " + amountPaid + " )";
-        return outString;
+        return "( " + personName + ", " + phoneNumber + ", " + amountPaid + " )";
     }
 
     @Override

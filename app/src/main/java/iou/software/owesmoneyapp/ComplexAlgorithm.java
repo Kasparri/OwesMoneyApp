@@ -17,7 +17,7 @@ public class ComplexAlgorithm {
     private ArrayList<String> transactions;
 
     public void testdata() {
-        this.friends = new ArrayList<Person>();
+        this.friends = new ArrayList<>();
         friends.add(new Person("Sami", "51147616", 200));
         friends.add(new Person("August", "51147617", 100));
         friends.add(new Person("Engberg", "51147618", 0));
@@ -42,9 +42,9 @@ public class ComplexAlgorithm {
 
         int mean = calculateMean(friends);
 
-        this.takesMoney = new ArrayList<Person>();
-        this.givesMoney = new ArrayList<Person>();
-        this.balanceIsZero = new ArrayList<Person>();
+        this.takesMoney = new ArrayList<>();
+        this.givesMoney = new ArrayList<>();
+        this.balanceIsZero = new ArrayList<>();
 
         for (int i = 0; i < friends.size(); i++) {
             Person person = friends.get(i);
@@ -66,7 +66,7 @@ public class ComplexAlgorithm {
     @SuppressWarnings("unchecked")
     public void calculateTransactions(ArrayList<Person> friendsPayment) {
 
-        this.transactions = new ArrayList<String>();
+        this.transactions = new ArrayList<>();
 
         whoOwesWhoTakes(friendsPayment);
 
