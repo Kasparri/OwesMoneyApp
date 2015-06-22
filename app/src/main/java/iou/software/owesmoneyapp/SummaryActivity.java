@@ -63,7 +63,16 @@ public class SummaryActivity extends Activity {
 
 
 
+        //Mobilepay Button
+        final Button mMobilepayButton = (Button) findViewById(R.id.notify_button);
+        mMobilepayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Iterate over every person sending an sms to each one
 
+            }
+
+        });
 
         //Summarize Button
         final Button mSendButton = (Button) findViewById(R.id.notify_button);

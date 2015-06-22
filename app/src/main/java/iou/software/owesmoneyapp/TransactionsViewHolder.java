@@ -7,6 +7,7 @@ import android.widget.TextView;
 /**
  * Created by Mads on 6/21/2015.
  */
+
 public class TransactionsViewHolder {
     private CheckBox checkBox ;
     private TextView textView ;
