@@ -5,33 +5,33 @@
               android:orientation="horizontal">
 
 
-    <!-- TextView with layout weight of .6 out of 1 -->
+    <!-- TextView with layout weight of .50 out of 1 -->
     <TextView
         android:id="@+id/billing_name"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.6"
+        android:layout_weight="0.5"
         android:textSize="20dp"
         android:textColor="@color/black"/>
 
-    <!-- Button with layout weight of .15 out of 1 -->
+    <!-- Button with layout weight of .20 out of 1 -->
     <Button
         android:id="@+id/edit_billing"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.15"
-        android:text="Edit"
-        android:textSize="8dp"
+        android:layout_weight="0.20"
+        android:text="@string/edit_button"
+        android:textSize="20dp"
         android:textColor="@color/black"/>
 
-    <!-- Button with layout weight of .15 out of 1 -->
+    <!-- Button with layout weight of .20 out of 1 -->
     <Button
         android:id="@+id/delete_billing"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.15"
-        android:text="Cancel"
-        android:textSize="8dp"
+        android:layout_weight="0.20"
+        android:text="@string/delete_button"
+        android:textSize="15dp"
         android:textColor="@color/black"/>
 
     <!-- Checkbox with layout weight of .1 out of 1 -->

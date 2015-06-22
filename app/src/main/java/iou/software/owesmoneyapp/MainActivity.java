@@ -89,6 +89,7 @@ public class MainActivity extends ListActivity {
                 final EditText titleName = new EditText(mContext);
                 titleName.setTextColor(Color.BLACK);
                 titleName.setHint(R.string.popup_textEdit_hint);
+                titleName.setSingleLine(true);
 
                 // adds it
                 popup.setView(titleName);
