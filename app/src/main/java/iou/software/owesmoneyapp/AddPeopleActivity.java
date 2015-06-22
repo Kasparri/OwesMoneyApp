@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 /**
@@ -17,6 +18,7 @@ public class AddPeopleActivity extends Activity {
     EditText mName;
     EditText mNumber;
     EditText mAmountPaid;
+
 
 
 
@@ -35,30 +37,37 @@ public class AddPeopleActivity extends Activity {
         final Button submitButton = (Button) findViewById(R.id.submit_button);
         submitButton.setOnClickListener(new Button.OnClickListener() {
 
+
             @Override
             public void onClick(View v) {
-            //Getting strings from TextEdits.
-                String name = mName.getText().toString();
-                String number = mNumber.getText().toString();
-                //Getting the amountPaid as string.
-                String amountPaidString = mAmountPaid.getText().toString();
-                //Parsing the string to int.
-                int amountPaid = Integer.parseInt(amountPaidString);
+                String emptyString = "";
+                //Getting strings from TextEdits and checks if data is inserted.
+                if (!(mName.getText().toString().equals(emptyString))  && !(mNumber.getText().toString().equals(emptyString))
+                        && !(mAmountPaid.getText().toString().equals(emptyString))) {
 
-                //Creating the new person with the given data
-                //Person name = new Person(name,number,amountPaid);
-                Person newPerson = new Person(name,number,amountPaid);
-                Log.i("Hello","Person created");
+                    String name = mName.getText().toString();
+                    String number = mNumber.getText().toString();
+                    //Getting the amountPaid as string.
+                    String amountPaidString = mAmountPaid.getText().toString();
+                    //Parsing the string to int.
+                    int amountPaid = Integer.parseInt(amountPaidString);
 
-
+                    //Creating the new person with the given data
+                    //Person name = new Person(name,number,amountPaid);
+                    Person newPerson = new Person(name, number, amountPaid);
+                    Log.i("Hello", "Person created");
+                    finish();
+                }else {
+                    //Tells user to fill in all fields in case the user didnt.
+                    Toast.makeText(getApplicationContext(), "Please fill in all fields!", Toast.LENGTH_LONG).show();
+                }
             }
+
         });
 
 
 
     }
-
-
 
 
 

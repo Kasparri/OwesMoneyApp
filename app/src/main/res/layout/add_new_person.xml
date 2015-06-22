@@ -28,8 +28,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:hint="Enter name"/>
-
+        android:hint="Enter name"
+        android:singleLine="true"
+        android:maxLength="20"/>
 
     <!-- Phone number -->
 
@@ -50,11 +51,13 @@
         />
 
     <EditText
+        android:inputType="number"
         android:id="@+id/enter_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
-        android:hint="Enter phone number"/>
+        android:hint="Enter phone number"
+        android:singleLine="true"/>
 
 
     <!-- Amount paid -->
@@ -76,12 +79,14 @@
         />
 
     <EditText
+        android:inputType="number"
         android:id="@+id/enter_amount_paid"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter amount paid"
-        android:layout_marginBottom="25dp"/>
+        android:layout_marginBottom="25dp"
+        android:singleLine="true"/>
 
     <Button
         android:id="@+id/submit_button"
