@@ -17,7 +17,7 @@ public class PersonListAdapter extends BaseAdapter {
 
 	private final List<Person> mItems = new ArrayList<>();
 	private final Context mContext;
-	private static final int ADD_PERSON_REQUEST = 0;
+	private static final int ADD_PERSON_REQUEST = 1;
 
 	private static final String TAG = "ActivityOverview";
 
