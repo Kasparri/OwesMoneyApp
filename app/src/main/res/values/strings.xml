@@ -8,5 +8,13 @@
     <string name="enter_title_string">Enter Title</string>
     <string name="name_string">Enter Name</string>
 
+    <string name="edit_string">Edit</string>
+    <string name="summarize_billing_string">Summarize Billing</string>
+    <string name="dkk_string">DKK</string>
+    <string name="total_string">Total:</string>
+    <string name="average_string">Average:</string>
+    <string name="delete_string">Delete</string>
+    <string name="add_new_person_to_billing_string">Add New Person To Billing</string>
+
 
 </resources>
