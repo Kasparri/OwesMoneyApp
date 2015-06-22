@@ -2,12 +2,29 @@ package iou.software.owesmoneyapp;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by Sami on 21-06-2015.
  */
 public class ComplexAlgorithm {
+
+    public static void main(String[] args) {
+        ArrayList<Person> friends = new ArrayList<Person>();
+        friends.add(new Person("Sami", "51147616", 0));
+        friends.add(new Person("Maibohm", "51147616", 0));
+        friends.add(new Person("August", "51147617", 3));
+
+        ComplexAlgorithm complex = new ComplexAlgorithm();
+
+        complex.whoOwesWhoTakes(friends);
+
+//		System.out.println(complex.takesMoney);
+//		System.out.println(complex.givesMoney);
+//		System.out.println(complex.balanceIsZero);
+
+        complex.calculateTransactions(friends);
+        System.out.println(complex.transactions);
+    }
 
     //Field
     private ArrayList<Person> friends;
@@ -15,6 +32,7 @@ public class ComplexAlgorithm {
     private ArrayList<Person> givesMoney;
     private ArrayList<Person> balanceIsZero;
     private ArrayList<String> transactions;
+    private ArrayList<Transactions> transactions1;
 
     public void testdata() {
         this.friends = new ArrayList<>();
@@ -76,19 +94,21 @@ public class ComplexAlgorithm {
                     Person taker = takesMoney.get(i);
                     Person giver = givesMoney.get(j);
                     int diff = taker.getAmountPaid() + giver.getAmountPaid();
+                    System.out.println(diff);
                     if (diff == 0) {
                         transactions.add(giver.getPersonName() + " owes " + giver.getAmountPaid() +
                                 " to " + taker.getPersonName());
-
+                        transactions1.add(new Transactions(giver,taker,giver.getAmountPaid()));
                         takesMoney.remove(i);
                         givesMoney.remove(j);
 
-                        if (takesMoney.isEmpty() || givesMoney.isEmpty()) {
-                            break;
-                        }
-
                     }
                 }
+
+            }
+            //break if one of the lists is empty
+            if (takesMoney.isEmpty() || givesMoney.isEmpty()) {
+                break;
             }
 
             // takesMost = lowest balance, givesMost = highest balance
@@ -101,6 +121,7 @@ public class ComplexAlgorithm {
             if ( diff < 0) {
                 transactions.add(givesMost.getPersonName() + " owes " + givesMost.getAmountPaid() +
                         " to " + takesMost.getPersonName());
+                transactions1.add(new Transactions(givesMost,takesMost,givesMost.getAmountPaid()));
 
                 takesMost.setAmountPaid(diff);
                 Collections.sort(takesMoney);
@@ -111,6 +132,7 @@ public class ComplexAlgorithm {
             else {
                 transactions.add(givesMost.getPersonName() + " owes " + (takesMost.getAmountPaid()*-1) +
                         " to " + takesMost.getPersonName());
+                transactions1.add(new Transactions(givesMost,takesMost,takesMost.getAmountPaid()));
                 givesMost.setAmountPaid(diff);
                 Collections.sort(givesMoney);
                 takesMoney.remove(takesMost);
