@@ -7,12 +7,12 @@ import android.widget.TextView;
 /**
  * Created by Mads on 6/21/2015.
  */
-public class PersonViewHolder {
+public class TransactionsViewHolder {
     private CheckBox checkBox ;
     private TextView textView ;
 
-    public PersonViewHolder() {}
-    public PersonViewHolder(TextView textView,CheckBox checkBox) {
+    public TransactionsViewHolder() {}
+    public TransactionsViewHolder(TextView textView, CheckBox checkBox) {
         this.checkBox=checkBox;
         this.textView=textView;
     }

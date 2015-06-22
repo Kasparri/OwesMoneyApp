@@ -1,28 +1,19 @@
 package iou.software.owesmoneyapp;
 
 import android.app.Activity;
-import android.app.ListActivity;
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import iou.software.owesmoneyapp.Person;
 
 
 public class SummaryActivity extends Activity {
@@ -34,7 +25,7 @@ public class SummaryActivity extends Activity {
     private static TextView mAverageAmountView;
     private ListView mListView;
 
-    PersonsAdapter mAdapter;
+    TransactionsAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +42,13 @@ public class SummaryActivity extends Activity {
         Person mads = new Person("Mads","45880974",190);
         Person jens = new Person("Jens","24660202",0);
         Person[] persons = {mads,jens};
-        final List<Person> personList = new ArrayList<>();
+        final ArrayList<Person> personList = new ArrayList<>();
         personList.addAll(Arrays.asList(persons));
 
-        mAdapter = new PersonsAdapter(getApplicationContext(),personList);
+        ComplexAlgorithm complex = new ComplexAlgorithm();
+        complex.calculateTransactions(personList);
+
+        mAdapter = new TransactionsAdapter(getApplicationContext(),complex.getTransactions1());
         mListView.setAdapter(mAdapter);
 
 

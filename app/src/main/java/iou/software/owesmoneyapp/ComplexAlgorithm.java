@@ -9,7 +9,7 @@ import java.util.Collections;
 public class ComplexAlgorithm {
 
     public static void main(String[] args) {
-        ArrayList<Person> friends = new ArrayList<Person>();
+        ArrayList<Person> friends = new ArrayList<>();
         friends.add(new Person("Sami", "51147616", 0));
         friends.add(new Person("Maibohm", "51147616", 0));
         friends.add(new Person("August", "51147617", 3));
@@ -23,7 +23,7 @@ public class ComplexAlgorithm {
 //		System.out.println(complex.balanceIsZero);
 
         complex.calculateTransactions(friends);
-        System.out.println(complex.transactions);
+        System.out.println(complex.transactionStrings);
     }
 
     //Field
@@ -31,7 +31,7 @@ public class ComplexAlgorithm {
     private ArrayList<Person> takesMoney;
     private ArrayList<Person> givesMoney;
     private ArrayList<Person> balanceIsZero;
-    private ArrayList<String> transactions;
+    private ArrayList<String> transactionStrings;
     private ArrayList<Transactions> transactions1;
 
     public void testdata() {
@@ -84,8 +84,8 @@ public class ComplexAlgorithm {
     @SuppressWarnings("unchecked")
     public void calculateTransactions(ArrayList<Person> friendsPayment) {
 
-        this.transactions = new ArrayList<String>();
-        this.transactions1 = new ArrayList<Transactions>();
+        this.transactionStrings = new ArrayList<>();
+        this.transactions1 = new ArrayList<>();
 
         whoOwesWhoTakes(friendsPayment);
 
@@ -97,7 +97,7 @@ public class ComplexAlgorithm {
                     int diff = taker.getAmountPaid() + giver.getAmountPaid();
                     System.out.println(diff);
                     if (diff == 0) {
-                        transactions.add(giver.getPersonName() + " owes " + giver.getAmountPaid() +
+                        transactionStrings.add(giver.getPersonName() + " owes " + giver.getAmountPaid() +
                                 " to " + taker.getPersonName());
                         transactions1.add(new Transactions(giver,taker,giver.getAmountPaid()));
                         takesMoney.remove(i);
@@ -120,7 +120,7 @@ public class ComplexAlgorithm {
 
             //If takesMost needs more money than givesMost owes
             if ( diff < 0) {
-                transactions.add(givesMost.getPersonName() + " owes " + givesMost.getAmountPaid() +
+                transactionStrings.add(givesMost.getPersonName() + " owes " + givesMost.getAmountPaid() +
                         " to " + takesMost.getPersonName());
                 transactions1.add(new Transactions(givesMost,takesMost,givesMost.getAmountPaid()));
 
@@ -131,7 +131,7 @@ public class ComplexAlgorithm {
 
             //If givesMost owes more money than takesMost needs
             else {
-                transactions.add(givesMost.getPersonName() + " owes " + (takesMost.getAmountPaid()*-1) +
+                transactionStrings.add(givesMost.getPersonName() + " owes " + (takesMost.getAmountPaid() * -1) +
                         " to " + takesMost.getPersonName());
                 transactions1.add(new Transactions(givesMost,takesMost,takesMost.getAmountPaid()));
                 givesMost.setAmountPaid(diff);
@@ -143,6 +143,9 @@ public class ComplexAlgorithm {
 
     }
 
+    public ArrayList<Transactions> getTransactions1() {
+        return transactions1;
+    }
 }
 
 
