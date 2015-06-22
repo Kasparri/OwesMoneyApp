@@ -7,8 +7,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.content.SharedPreferences;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,10 +30,13 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Created by Kasper on 19/06/15.
+ */
 public class MainActivity extends ListActivity {
 
     public final static String TITLE = "title";
+    public final static String JSON = "JSON";
 
     private AddBillingListAdapter mAdapter;
     private static final int ADD_BILLING_ITEM_REQUEST = 0;
@@ -44,7 +49,7 @@ public class MainActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Preperations for gson array
+        // preperations for gson array
         SharedPreferences pManager = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         billings = gson.fromJson(pManager.getString("BILLING","[]"), new TypeToken<List<Person>>() {}.getType());
 
@@ -135,6 +140,47 @@ public class MainActivity extends ListActivity {
 
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == ADD_BILLING_ITEM_REQUEST && resultCode == RESULT_OK){
+
+
+            String json = data.getStringExtra(JSON);
+
+            Billing billing = new Gson().fromJson(json,Billing.class);
+
+
+            mAdapter.add(billing);
+
+            Intent toSummary = new Intent(MainActivity.this, SummaryActivity.class);
+            startActivity(toSummary);
+        }
+
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+        updateView();
+    }
+
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+
+
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -163,6 +209,9 @@ public class MainActivity extends ListActivity {
 
     }
 
+    private void updateView(){
+        mAdapter.notifyDataSetChanged();
+    }
 
 
     // internal ListAdapter class

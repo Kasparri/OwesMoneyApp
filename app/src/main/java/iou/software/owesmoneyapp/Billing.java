@@ -15,6 +15,7 @@ public class Billing {
 
     public final static String TITLE = "title";
     public final static String STATUS = "status";
+    public final static String JSON = "JSON";
 
     private String title;
     private boolean status;
@@ -26,7 +27,7 @@ public class Billing {
         status = intent.getBooleanExtra(Billing.STATUS, false);
     }
 
-    public Billing(String title, boolean status, ArrayList<Person> persons){
+    public Billing(String title, boolean status, ArrayList<Person> persons) {
         this.title = title;
         this.status = status;
         this.persons = persons;
@@ -35,6 +36,10 @@ public class Billing {
 
     public String getTitle() {
         return title;
+    }
+
+    public List<Person> getPersons(){
+        return persons;
     }
 
     public boolean getStatus() {
@@ -46,6 +51,13 @@ public class Billing {
 
         intent.putExtra(TITLE, title);
         intent.putExtra(STATUS, status);
+
+    }
+
+
+    public static void packageIntent(Intent intent, String json) {
+
+        intent.putExtra(JSON,json);
 
     }
 

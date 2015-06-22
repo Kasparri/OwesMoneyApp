@@ -52,6 +52,7 @@ public class OverviewOfBillingActivity extends Activity {
     Billing mBilling;
     final Gson gson = new Gson();
     SharedPreferences pManager;
+    private String mTitle;
 
     PersonListAdapter mAdapter;
 
@@ -70,7 +71,8 @@ public class OverviewOfBillingActivity extends Activity {
         mAverageAmountView = (TextView) findViewById(R.id.average_money);
         mAverageAmountView.setText(""+mAverageAmount);
         mBillingNameView = (TextView) findViewById(R.id.billing_name_overview);
-        mBillingNameView.setText(getIntent().getStringExtra(TITLE));
+        mTitle = getIntent().getStringExtra(TITLE);
+        mBillingNameView.setText(mTitle);
         mListView = (ListView) findViewById(R.id.listView);
 
         // Create a new PersonListAdapter
@@ -121,18 +123,27 @@ public class OverviewOfBillingActivity extends Activity {
         mSummarizeButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Billing newBilling = new Billing(TITLE,true,mAdapter.getPersons());
-
+                Billing newBilling = new Billing(mTitle,false,mAdapter.getPersons());
+/*
                    //Saves the billing into the array.
                     billings.add(newBilling);
                     String s = gson.toJson(billings);
                     pManager.edit().putString("BILLING",s).apply();
                     Log.i(TAG, "Saved items");
+                    */
 
 
 
-                Intent addIntent = new Intent(OverviewOfBillingActivity.this,SummaryActivity.class);
-                startActivity(addIntent);
+                // we package the billing as a JSON string
+                String json = new Gson().toJson(newBilling);
+
+                Intent data = new Intent();
+                Billing.packageIntent(data,json);
+
+                // sends the JSON string back to the main activity
+                setResult(RESULT_OK, data);
+
+                finish();
 
             }
         });
