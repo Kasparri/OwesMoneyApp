@@ -33,8 +33,6 @@ public class AddPersonActivity extends Activity {
         setContentView(R.layout.add_new_person);
 
 
-
-
         //Getting the EditText views
         mName = (EditText)findViewById(R.id.enter_name);
         mNumber = (EditText)findViewById(R.id.enter_number);
