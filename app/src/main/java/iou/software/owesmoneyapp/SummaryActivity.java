@@ -34,11 +34,17 @@ public class SummaryActivity extends Activity {
         setContentView(R.layout.activity_summary);
 
         //List
-        Person mads = new Person("Mads","45880974",190);
-        Person jens = new Person("Jens","5554",0);
+        Person maren = new Person("Maren","5556",10);
+        Person jon = new Person("Jon","5554",100);
+        Person maibohm = new Person("Maibohm","21563759",10);
+        Person sami = new Person("Sami","51147616",100);
+
         final ArrayList<Person> personList = new ArrayList<>();
-        personList.add(mads);
-        personList.add(jens);
+        personList.add(maren);
+        personList.add(jon);
+        //personList.add(sami);
+        //personList.add(maibohm);
+
 
         final ComplexAlgorithm complex = new ComplexAlgorithm();
 
@@ -63,7 +69,16 @@ public class SummaryActivity extends Activity {
 
 
 
+        //Mobilepay Button
+        final Button mMobilepayButton = (Button) findViewById(R.id.notify_button);
+        mMobilepayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Iterate over every person sending an sms to each one
 
+            }
+
+        });
 
         //Summarize Button
         final Button mSendButton = (Button) findViewById(R.id.notify_button);
@@ -73,8 +88,11 @@ public class SummaryActivity extends Activity {
                 //Iterate over every person sending an sms to each one
                 for (int i=0;i<complex.getTransactions1().size();i++) {
                     String phonenumber = complex.getTransactions1().get(i).getOwes().getPhoneNumber();
-                    String message =complex.getTransactionStrings().get(i)+"("+complex.getTransactions1().get(i).getTakes().getPhoneNumber()+")";
-                    sendSMS(phonenumber, message);
+                    String message = complex.getTransactionStrings().get(i)+" (  " + complex.getTransactions1().get(i).getTakes().getPhoneNumber()+"  )";
+                    String message2 = " MobilePay for Android: https://goo.gl/eWx9eo";
+                    String message3 = " MobilePay for iPhone: https://goo.gl/pMCTVS";
+
+                    sendSMS(phonenumber, message + message2 + message3);
                 }
             }
 
@@ -101,8 +119,10 @@ public class SummaryActivity extends Activity {
 
     }
     public void sendSMS (String phonenumber, String message) {
+        System.out.println("sendSMS has started " + phonenumber);
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(phonenumber, null, message, null, null);
+        System.out.println("sendSMS is finished");
 
     }
 
