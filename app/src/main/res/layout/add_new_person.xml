@@ -4,6 +4,7 @@
               android:layout_height="fill_parent"
               android:orientation="vertical"
               android:padding="20dp">
+
     <Button
         android:id="@+id/contact_button"
         android:layout_width="wrap_content"
