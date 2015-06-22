@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -63,13 +64,14 @@ public class OverviewOfBillingActivity extends Activity {
 
         //Preperations for gson array
         pManager = PreferenceManager.getDefaultSharedPreferences(OverviewOfBillingActivity.this);
-        billings = gson.fromJson(pManager.getString("BILLING","[]"), new TypeToken<List<Billing>>() {}.getType());
+        billings = gson.fromJson(pManager.getString("BILLING", "[]"), new TypeToken<List<Billing>>() {
+        }.getType());
 
 
         mTotalAmountView = (TextView) findViewById(R.id.total_money);
-        mTotalAmountView.setText(""+mTotalAmount);
+        mTotalAmountView.setText("" + mTotalAmount);
         mAverageAmountView = (TextView) findViewById(R.id.average_money);
-        mAverageAmountView.setText(""+mAverageAmount);
+        mAverageAmountView.setText("" + mAverageAmount);
         mBillingNameView = (TextView) findViewById(R.id.billing_name_overview);
         mTitle = getIntent().getStringExtra(TITLE);
         mBillingNameView.setText(mTitle);
@@ -81,7 +83,7 @@ public class OverviewOfBillingActivity extends Activity {
         //Make it listen and update total and average, maybe delete super.onChanged
         mAdapter.registerDataSetObserver(new DataSetObserver() {
             @Override
-            public void onChanged(){
+            public void onChanged() {
                 super.onChanged();
                 updateTotalAndAverageAmounts();
             }
@@ -91,13 +93,13 @@ public class OverviewOfBillingActivity extends Activity {
         mListView.setFooterDividersEnabled(true);
 
         //Load
-        if (mAdapter.getCount() == 0){
+        if (mAdapter.getCount() == 0) {
             loadItems();
         }
 
         //  - Inflate footerView for overview_footer_view.xml_view.xml file
 
-        TextView footerView = (TextView) getLayoutInflater().inflate(R.layout.overview_footer_view,null);
+        TextView footerView = (TextView) getLayoutInflater().inflate(R.layout.overview_footer_view, null);
 
         //  - Add footerView to ListView
 
@@ -109,7 +111,7 @@ public class OverviewOfBillingActivity extends Activity {
             public void onClick(View v) {
 
                 // - Implement OnClick().
-                Intent addIntent = new Intent(OverviewOfBillingActivity.this,AddPersonActivity.class);
+                Intent addIntent = new Intent(OverviewOfBillingActivity.this, AddPersonActivity.class);
                 startActivityForResult(addIntent, ADD_PERSON_REQUEST);
             }
         });
@@ -123,27 +125,29 @@ public class OverviewOfBillingActivity extends Activity {
         mSummarizeButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Billing newBilling = new Billing(mTitle,false,mAdapter.getPersons());
-/*
-                   //Saves the billing into the array.
-                    billings.add(newBilling);
-                    String s = gson.toJson(billings);
-                    pManager.edit().putString("BILLING",s).apply();
-                    Log.i(TAG, "Saved items");
-                    */
 
+                // checks if there is any persons added to the billing
+                // if there is none, show a toast
+                // if there is any added, go to the summary activity
 
+                if (mAdapter.getPersons().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), R.string.no_persons_toast, Toast.LENGTH_LONG).show();
+                } else {
 
-                // we package the billing as a JSON string
-                String json = new Gson().toJson(newBilling);
+                    Billing newBilling = new Billing(mTitle, false, mAdapter.getPersons());
 
-                Intent data = new Intent();
-                Billing.packageIntent(data,json);
+                    // we package the billing as a JSON string
+                    String json = new Gson().toJson(newBilling);
 
-                // sends the JSON string back to the main activity
-                setResult(RESULT_OK, data);
+                    Intent data = new Intent();
+                    Billing.packageIntent(data, json);
 
-                finish();
+                    // sends the JSON string back to the main activity
+                    setResult(RESULT_OK, data);
+
+                    finish();
+                }
+
 
             }
         });
@@ -154,7 +158,7 @@ public class OverviewOfBillingActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(requestCode == ADD_PERSON_REQUEST && resultCode == RESULT_OK){
+        if (requestCode == ADD_PERSON_REQUEST && resultCode == RESULT_OK) {
             Log.i(TAG, "Entered onActivityResult()");
 
             /*Person item = new Person("Peter", "444444", 190);
@@ -169,24 +173,24 @@ public class OverviewOfBillingActivity extends Activity {
             updateTotalAndAverageAmounts();
 
             Log.i(TAG, "Ending onActivityResult()");
-            Log.i(TAG, ""+mAdapter.getCount());
+            Log.i(TAG, "" + mAdapter.getCount());
         }
     }
 
-    private void updateTotalAndAverageAmounts(){
+    private void updateTotalAndAverageAmounts() {
 
         //Calculates total and mean values, to be removed
         mTotalAmount = 0;
         mAverageAmount = 0;
 
-        if(mAdapter.getCount() > 0){
-            for(int i = 0; i < mAdapter.getCount(); i++){
+        if (mAdapter.getCount() > 0) {
+            for (int i = 0; i < mAdapter.getCount(); i++) {
                 mTotalAmount += mAdapter.getItem(i).getAmountPaid();
             }
-            mAverageAmount = mTotalAmount/mAdapter.getCount();
+            mAverageAmount = mTotalAmount / mAdapter.getCount();
         }
 
-        Log.i("TAG", ""+mAdapter.getCount());
+        Log.i("TAG", "" + mAdapter.getCount());
 
         //Update the views
         mTotalAmountView.setText("" + mTotalAmount);
@@ -198,9 +202,11 @@ public class OverviewOfBillingActivity extends Activity {
         super.onResume();
         // Load saved PersonItems, if necessary
 
-        if (mAdapter.getCount() == 0){
+        if (mAdapter.getCount() == 0) {
             loadItems();
         }
+
+        updateTotalAndAverageAmounts();
     }
 
     @Override
@@ -249,9 +255,6 @@ public class OverviewOfBillingActivity extends Activity {
     private void saveItems() {
 
 
-
-
-
     }
 
     //PersonListAdapter
@@ -271,7 +274,7 @@ public class OverviewOfBillingActivity extends Activity {
         }
 
 
-        public ArrayList<Person> getPersons(){
+        public ArrayList<Person> getPersons() {
             return persons;
         }
 
@@ -294,7 +297,7 @@ public class OverviewOfBillingActivity extends Activity {
 
         }
 
-        public void remove(Person person){
+        public void remove(Person person) {
 
             persons.remove(person);
             notifyDataSetChanged();
@@ -339,7 +342,7 @@ public class OverviewOfBillingActivity extends Activity {
             //  - Inflate the View for this Item
             // from person_item.xml
             RelativeLayout itemLayout = (RelativeLayout) LayoutInflater.
-                    from(mContext).inflate(R.layout.person_item_overview,parent,false);
+                    from(mContext).inflate(R.layout.person_item_overview, parent, false);
             // Fill in specific item data
             // Remember that the data that goes in this View
             // corresponds to the user interface elements defined
@@ -361,7 +364,7 @@ public class OverviewOfBillingActivity extends Activity {
                 public void onClick(View v) {
 
                     // - Implement OnClick().
-                    Intent addIntent = new Intent(OverviewOfBillingActivity.this,AddPersonActivity.class);
+                    Intent addIntent = new Intent(OverviewOfBillingActivity.this, AddPersonActivity.class);
                     startActivityForResult(addIntent, ADD_PERSON_REQUEST);
 
                     Log.i(TAG, "onClick for the edit button");
@@ -386,7 +389,6 @@ public class OverviewOfBillingActivity extends Activity {
             return itemLayout;
 
         }
-
 
 
     }
