@@ -1,8 +1,11 @@
 package iou.software.owesmoneyapp;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,16 +26,21 @@ import java.util.List;
 
 public class MainActivity extends ListActivity {
 
+    public final static String TITLE = "title";
+
     private AddBillingListAdapter mAdapter;
     private static final int ADD_BILLING_ITEM_REQUEST = 0;
+    private Context mContext;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mContext = getApplicationContext();
+
         // Create a new AddBillingListAdapter for this ListActivity's ListView
-        mAdapter = new AddBillingListAdapter(getApplicationContext());
+        mAdapter = new AddBillingListAdapter(mContext);
 
 
         // Inflate footerView for activity_main.xml file
@@ -50,8 +59,61 @@ public class MainActivity extends ListActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MainActivity.this, OverviewOfBillingActivity.class);
-                startActivityForResult(intent, ADD_BILLING_ITEM_REQUEST);
+                // makes a popup
+                AlertDialog.Builder popup = new AlertDialog.Builder(MainActivity.this);
+
+
+                // sets its title and message
+                popup.setTitle("Set name of billing");
+                popup.setMessage("Insert the name of the billing in the text box below:");
+
+
+                // makes the EditText field that is to be added to the popup window
+                final EditText titleName = new EditText(mContext);
+                titleName.setTextColor(Color.BLACK);
+                titleName.setHint("billing name");
+
+                // adds it
+                popup.setView(titleName);
+
+
+                // sets the Confirm button
+
+                popup.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // sets a default name, if no name is entered
+
+                        if (titleName.getText().toString().isEmpty()){
+                            titleName.setText("Default Billing");
+                        }
+
+                        // starts Overview of Billing activity
+
+                        Intent intent = new Intent(MainActivity.this, OverviewOfBillingActivity.class);
+                        intent.putExtra(TITLE, titleName.getText().toString());
+                        startActivityForResult(intent, ADD_BILLING_ITEM_REQUEST);
+                    }
+                });
+
+
+                // sets the cancel button
+
+                popup.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // canceled, do nothing
+
+                    }
+                });
+
+
+                // shows the popup
+                popup.show();
+
+
 
             }
         });
@@ -83,11 +145,6 @@ public class MainActivity extends ListActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-
-    }
 
     public class AddBillingListAdapter extends BaseAdapter {
 
