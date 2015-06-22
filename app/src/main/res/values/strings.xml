@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">OwesMoneyApp</string>
 
     <string name="add_new_billing">Click here to add a new billing</string>
@@ -17,5 +18,16 @@
     <string name="add_new_person_to_billing_string">Add New Person To Billing</string>
     <string name="send_sms">Notify everyone by SMS</string>
     <string name="back_to_main">Return to overview</string>
+
+    <!-- MainActivity popup -->
+    <string name="popup_title">Set name of billing</string>
+    <string name="popup_message">Insert the name of the billing in the text box below:</string>
+    <string name="popup_textEdit_hint">Billing name</string>
+    <string name="popup_confirm">Confirm</string>
+    <string name="popup_default_name">Default Billing</string>
+    <string name="popup_cancel">Cancel</string>
+
+    <!-- AddPersonActivity -->
+    <string name="add_person_toast_message">Please fill in all fields!</string>
 
 </resources>

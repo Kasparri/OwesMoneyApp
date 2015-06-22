@@ -82,8 +82,8 @@ public class AddPersonActivity extends Activity {
                     finish();
 
                 }else {
-                    //Tells user to fill in all fields in case the user didnt.
-                    Toast.makeText(getApplicationContext(), "Please fill in all fields!", Toast.LENGTH_LONG).show();
+                    //Tells user to fill in all fields in case the user didn't.
+                    Toast.makeText(getApplicationContext(), R.string.add_person_toast_message, Toast.LENGTH_LONG).show();
                 }
             }
 
