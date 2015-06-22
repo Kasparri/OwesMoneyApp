@@ -41,7 +41,7 @@ public class ComplexAlgorithm {
         friends.add(new Person("Engberg", "51147618", 0));
     }
 
-    private int calculateTotal(ArrayList<Person> friends) {
+    public int calculateTotal(ArrayList<Person> friends) {
         int sum = 0;
         if (!friends.isEmpty()) {
             for (int i = 0; i < friends.size(); i++) {
@@ -51,7 +51,7 @@ public class ComplexAlgorithm {
         return sum;
     }
 
-    private int calculateMean(ArrayList<Person> friends) {
+    public int calculateMean(ArrayList<Person> friends) {
         return calculateTotal(friends) / friends.size();
     }
 

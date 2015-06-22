@@ -23,6 +23,7 @@ public class SummaryActivity extends Activity {
 
     private static TextView mTotalAmountView;
     private static TextView mAverageAmountView;
+    private static View mSeperatorView;
     private ListView mListView;
 
     TransactionsAdapter mAdapter;
@@ -32,27 +33,33 @@ public class SummaryActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
 
-        mTotalAmountView = (TextView) findViewById(R.id.total_money);
-        mTotalAmountView.setText(""+mTotalAmount);
-        mAverageAmountView = (TextView) findViewById(R.id.average_money);
-        mAverageAmountView.setText(""+mAverageAmount);
-        mListView = (ListView) findViewById(R.id.listView);
-
         //List
         Person mads = new Person("Mads","45880974",190);
         Person jens = new Person("Jens","24660202",0);
-        Person[] persons = {mads,jens};
         final ArrayList<Person> personList = new ArrayList<>();
-        personList.addAll(Arrays.asList(persons));
+        personList.add(mads);
+        personList.add(jens);
 
         ComplexAlgorithm complex = new ComplexAlgorithm();
         complex.calculateTransactions(personList);
 
+        mTotalAmount=complex.calculateTotal(personList);
+        mAverageAmount=complex.calculateMean(personList);
+
         mAdapter = new TransactionsAdapter(getApplicationContext(),complex.getTransactions1());
         mListView.setAdapter(mAdapter);
 
+        mTotalAmountView = (TextView) findViewById(R.id.total_money);
+        mTotalAmountView.setText(""+mTotalAmount);
 
-        mListView.setFooterDividersEnabled(true);
+        mAverageAmountView = (TextView) findViewById(R.id.average_money);
+        mAverageAmountView.setText(""+mAverageAmount);
+
+        mSeperatorView = (View) findViewById(R.id.seperator);
+
+        mListView = (ListView) findViewById(R.id.listView);
+
+
 
         //Summarize Button
         final Button mSummarizeButton = (Button) findViewById(R.id.notify_button);
