@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -20,12 +21,14 @@ import android.widget.TextView;
 import android.util.Log;
 import android.view.MenuItem;
 
+import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OverviewOfBillingActivity extends Activity {
 
     private static final String TAG = "ActivityOverview";
+    public final static String TITLE = "title";
 
     private static final int ADD_PERSON_REQUEST = 1;
 
@@ -52,7 +55,7 @@ public class OverviewOfBillingActivity extends Activity {
         mAverageAmountView = (TextView) findViewById(R.id.average_money);
         mAverageAmountView.setText(""+mAverageAmount);
         mBillingNameView = (TextView) findViewById(R.id.billing_name_overview);
-        mBillingNameView.setText("Load stuff from somewhere");
+        mBillingNameView.setText(getIntent().getStringExtra(TITLE));
         mListView = (ListView) findViewById(R.id.listView);
 
         // Create a new PersonListAdapter
@@ -89,7 +92,7 @@ public class OverviewOfBillingActivity extends Activity {
             public void onClick(View v) {
 
                 // - Implement OnClick().
-                Intent addIntent = new Intent(OverviewOfBillingActivity.this,AddPeopleActivity.class);
+                Intent addIntent = new Intent(OverviewOfBillingActivity.this,AddPersonActivity.class);
                 startActivityForResult(addIntent, ADD_PERSON_REQUEST);
             }
         });
@@ -122,15 +125,20 @@ public class OverviewOfBillingActivity extends Activity {
                 mAdapter.add(item);
             }*/
 
+            Person person = new Person(data);
+
+            mAdapter.add(person);
+
             updateTotalAndAverageAmounts();
 
             Log.i(TAG, "Ending onActivityResult()");
+            Log.i(TAG, ""+mAdapter.getCount());
         }
     }
 
     private void updateTotalAndAverageAmounts(){
 
-        //Calculates total and mean values, to be removeds
+        //Calculates total and mean values, to be removed
         mTotalAmount = 0;
         mAverageAmount = 0;
 
@@ -203,6 +211,7 @@ public class OverviewOfBillingActivity extends Activity {
 
     // Save PersonItems to file
     private void saveItems() {
+
         Log.i(TAG, "Saved items");
     }
 
@@ -210,7 +219,7 @@ public class OverviewOfBillingActivity extends Activity {
 
     public class PersonListAdapter extends BaseAdapter {
 
-        private final List<Person> mItems = new ArrayList<>();
+        private final List<Person> persons = new ArrayList<>();
         private final Context mContext;
         private static final int ADD_PERSON_REQUEST = 1;
 
@@ -227,7 +236,7 @@ public class OverviewOfBillingActivity extends Activity {
 
         public void add(Person person) {
 
-            mItems.add(person);
+            persons.add(person);
             notifyDataSetChanged();
 
         }
@@ -236,14 +245,14 @@ public class OverviewOfBillingActivity extends Activity {
 
         public void clear() {
 
-            mItems.clear();
+            persons.clear();
             notifyDataSetChanged();
 
         }
 
         public void remove(Person person){
 
-            mItems.remove(person);
+            persons.remove(person);
             notifyDataSetChanged();
 
         }
@@ -253,7 +262,7 @@ public class OverviewOfBillingActivity extends Activity {
         @Override
         public int getCount() {
 
-            return mItems.size();
+            return persons.size();
 
         }
 
@@ -262,7 +271,7 @@ public class OverviewOfBillingActivity extends Activity {
         @Override
         public Person getItem(int pos) {
 
-            return mItems.get(pos);
+            return persons.get(pos);
 
         }
 
@@ -285,19 +294,20 @@ public class OverviewOfBillingActivity extends Activity {
 
             //  - Inflate the View for this Item
             // from person_item.xml
-            RelativeLayout itemLayout = (RelativeLayout) LayoutInflater.from(mContext).inflate(R.layout.person_item,parent,false);
+            RelativeLayout itemLayout = (RelativeLayout) LayoutInflater.
+                    from(mContext).inflate(R.layout.person_item_overview,parent,false);
             // Fill in specific item data
             // Remember that the data that goes in this View
             // corresponds to the user interface elements defined
             // in the layout file
 
-            //  - Display Title in TextView
+            //  - Display title in TextView
             final TextView nameView = (TextView) itemLayout.findViewById(R.id.person_name);
             nameView.setText(person.getPersonName());
 
-            //  - Display Title in TextView
+            //  - Display amount paid in TextView
             final TextView moneyView = (TextView) itemLayout.findViewById(R.id.person_money);
-            moneyView.setText("" + person.getAmountPaid());
+            moneyView.setText(Integer.toString(person.getAmountPaid()));
 
             //Display the edit button and set the on click listener
             final Button editButton = (Button) itemLayout.findViewById(R.id.edit_button);
@@ -307,7 +317,7 @@ public class OverviewOfBillingActivity extends Activity {
                 public void onClick(View v) {
 
                     // - Implement OnClick().
-                    Intent addIntent = new Intent(OverviewOfBillingActivity.this,AddPeopleActivity.class);
+                    Intent addIntent = new Intent(OverviewOfBillingActivity.this,AddPersonActivity.class);
                     startActivityForResult(addIntent, ADD_PERSON_REQUEST);
 
                     Log.i(TAG, "onClick for the edit button");
@@ -332,6 +342,9 @@ public class OverviewOfBillingActivity extends Activity {
             return itemLayout;
 
         }
+
+
+
     }
 
 

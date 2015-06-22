@@ -24,7 +24,7 @@
         </activity>
         <activity android:name=".OverviewOfBillingActivity" >
         </activity>
-        <activity android:name=".AddPeopleActivity" >
+        <activity android:name=".AddPersonActivity" >
         </activity>
         <activity android:name=".SummaryActivity"/>
     </application>

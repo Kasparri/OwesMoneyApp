@@ -1,65 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
     android:id="@+id/RelativeLayout1"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
+        android:id="@+id/person_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/person_name"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="26dp"
         android:layout_marginStart="26dp"
-        android:layout_marginTop="18dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/dkk_string"
-        android:id="@+id/DKK"
-        android:layout_alignTop="@+id/person_money"
-        android:layout_toRightOf="@+id/person_money"
-        android:layout_toEndOf="@+id/person_money" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/DKK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/person_money"
+        android:layout_toEndOf="@+id/person_money"
+        android:layout_toRightOf="@+id/person_money"
+        android:text="@string/dkk_string"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/black"/>
+
+    <TextView
         android:id="@+id/person_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/person_name"
-        android:layout_toRightOf="@+id/person_name"
-        android:layout_toEndOf="@+id/person_name"
         android:layout_marginLeft="55dp"
-        android:layout_marginStart="55dp" />
+        android:layout_marginStart="55dp"
+        android:layout_toEndOf="@+id/person_name"
+        android:layout_toRightOf="@+id/person_name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/black"/>
 
     <Button
+        android:id="@+id/edit_button"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/edit_string"
-        android:id="@+id/edit_button"
-        android:layout_marginRight="13dp"
-        android:layout_marginEnd="13dp"
         android:layout_alignBaseline="@+id/DKK"
         android:layout_alignBottom="@+id/DKK"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginEnd="13dp"
+        android:layout_marginRight="13dp"
+        android:text="@string/edit_string"/>
 
     <Button
+        android:id="@+id/delete_button"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/delete_string"
-        android:id="@+id/delete_button"
         android:layout_alignBaseline="@+id/DKK"
         android:layout_alignBottom="@+id/DKK"
         android:layout_toLeftOf="@+id/edit_button"
-        android:layout_toStartOf="@+id/edit_button" />
+        android:layout_toStartOf="@+id/edit_button"
+        android:text="@string/delete_string"/>
 
 </RelativeLayout>
