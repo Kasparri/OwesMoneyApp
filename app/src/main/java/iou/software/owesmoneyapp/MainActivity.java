@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +22,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,12 +35,19 @@ public class MainActivity extends ListActivity {
 
     private AddBillingListAdapter mAdapter;
     private static final int ADD_BILLING_ITEM_REQUEST = 0;
+    private List<Billing> billings;
     private Context mContext;
 
+    final Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Preperations for gson array
+        SharedPreferences pManager = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        billings = gson.fromJson(pManager.getString("BILLING","[]"), new TypeToken<List<Person>>() {}.getType());
+
 
         mContext = getApplicationContext();
 
@@ -145,6 +157,11 @@ public class MainActivity extends ListActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+    }
 
     public class AddBillingListAdapter extends BaseAdapter {
 

@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.widget.Button;
 import android.widget.CheckBox;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Kasper on 19/06/15.
  */
@@ -15,11 +18,19 @@ public class Billing {
 
     private String title;
     private boolean status;
+    private List<Person> persons;
 
 
     public Billing(Intent intent) {
         title = intent.getStringExtra(TITLE);
         status = intent.getBooleanExtra(Billing.STATUS, false);
+    }
+
+    public Billing(String title, boolean status, ArrayList<Person> persons){
+        this.title = title;
+        this.status = status;
+        this.persons = persons;
+
     }
 
     public String getTitle() {
