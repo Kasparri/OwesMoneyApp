@@ -47,7 +47,6 @@ public class AddBillingActivity extends Activity {
     private ListView mListView;
 
     List<Billing> billings;
-    Billing mBilling;
     final Gson gson = new Gson();
     SharedPreferences pManager;
     private String mTitle;
@@ -65,6 +64,7 @@ public class AddBillingActivity extends Activity {
         }.getType());
 
 
+        //Set the views
         mTotalAmountView = (TextView) findViewById(R.id.total_money);
         mTotalAmountView.setText("" + mTotalAmount);
         mAverageAmountView = (TextView) findViewById(R.id.average_money);
@@ -90,15 +90,15 @@ public class AddBillingActivity extends Activity {
         mListView.setFooterDividersEnabled(true);
 
 
-        //  - Inflate footerView for overview_footer_view.xml_view.xml file
+        // Inflate footerView for overview_footer_view.xml_view.xml file
 
         TextView footerView = (TextView) getLayoutInflater().inflate(R.layout.overview_footer_view, null);
 
-        //  - Add footerView to ListView
+        // Add footerView to ListView
 
         mListView.addFooterView(footerView);
 
-        //  - Attach Listener to FooterView
+        // Attach Listener to FooterView
         footerView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,7 +109,7 @@ public class AddBillingActivity extends Activity {
             }
         });
 
-        //  - Attach the adapter to ListView
+        // Attach the adapter to ListView
         mListView.setAdapter(mAdapter);
 
         // OnClickListener summarize button, opens summary-activity
@@ -146,8 +146,7 @@ public class AddBillingActivity extends Activity {
         });
     }
 
-    //For now just adds a lot of people to test,
-    // will eventually make data into people and add them
+    // Makes data into people and add them to the adapters array
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -188,39 +187,12 @@ public class AddBillingActivity extends Activity {
 
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-
-        menu.add(Menu.NONE, MENU_DELETE, Menu.NONE, "Delete all");
-        menu.add(Menu.NONE, MENU_BACK, Menu.NONE, "Go back");
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case MENU_DELETE:
-                mAdapter.clear();
-                return true;
-            case MENU_BACK:
-                setResult(RESULT_CANCELED);
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-
-    //PersonListAdapter
+    //PersonListAdapter Class
 
     public class PersonListAdapter extends BaseAdapter {
 
         private final ArrayList<Person> persons = new ArrayList<>();
         private final Context mContext;
-        private static final int ADD_PERSON_REQUEST = 1;
 
         public PersonListAdapter(Context context) {
 
@@ -239,15 +211,6 @@ public class AddBillingActivity extends Activity {
         public void add(Person person) {
 
             persons.add(person);
-            notifyDataSetChanged();
-
-        }
-
-        // Clears the list adapter of all items.
-
-        public void clear() {
-
-            persons.clear();
             notifyDataSetChanged();
 
         }
@@ -291,10 +254,10 @@ public class AddBillingActivity extends Activity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            //  - Get the current Item
+            //  Get the current Item
             final Person person = getItem(position);
 
-            //  - Inflate the View for this Item
+            //  Inflate the View for this Item
             // from person_item.xml
             RelativeLayout itemLayout = (RelativeLayout) LayoutInflater.
                     from(mContext).inflate(R.layout.person_item_overview, parent, false);
@@ -303,28 +266,28 @@ public class AddBillingActivity extends Activity {
             // corresponds to the user interface elements defined
             // in the layout file
 
-            //  - Display title in TextView
+            // Display title in TextView
             final TextView nameView = (TextView) itemLayout.findViewById(R.id.person_name);
             nameView.setText(person.getPersonName());
 
-            //  - Display amount paid in TextView
+            //  Display amount paid in TextView
             final TextView moneyView = (TextView) itemLayout.findViewById(R.id.person_money);
             moneyView.setText(Integer.toString(person.getAmountPaid()));
 
-            //Display the edit button and set the on click listener
+            // Display the edit button and set the on click listener
             final Button editButton = (Button) itemLayout.findViewById(R.id.edit_button);
 
             editButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    // - Implement OnClick().
+                    // Implement OnClick().
                     Toast.makeText(mContext, R.string.yet_to_be_added, Toast.LENGTH_SHORT).show();
 
                 }
             });
 
-            //Display the delete button and set the on click listener
+            // Display the delete button and set the on click listener
             final Button deleteButton = (Button) itemLayout.findViewById(R.id.delete_button);
 
             deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -340,11 +303,7 @@ public class AddBillingActivity extends Activity {
             return itemLayout;
 
         }
-
-
     }
-
-
 }
 
 
