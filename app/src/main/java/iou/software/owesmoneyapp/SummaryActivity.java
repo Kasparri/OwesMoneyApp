@@ -18,9 +18,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Created by Mads on 6/21/2015.
+ */
 
 public class SummaryActivity extends Activity {
-
+    //Fields
     public final static String JSON = "JSON";
     private static int mTotalAmount = 0;
     private static int mAverageAmount = 0;
@@ -37,20 +40,20 @@ public class SummaryActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
 
-
+        //Getting the billing out
         String json = getIntent().getStringExtra(JSON);
 
         Billing billing = new Gson().fromJson(json, Billing.class);
 
-
         final List<Person> personList = billing.getPersons();
 
-
+        //Starting up the ComplexAlgorithm class to process the data
         final ComplexAlgorithm complex = new ComplexAlgorithm();
 
+
+        //Setting the text views to display the average and total ammounts
         mTotalAmount=complex.calculateTotal((ArrayList<Person>) personList);
         mAverageAmount=complex.calculateMean((ArrayList<Person>) personList);
-
 
         mTotalAmountView = (TextView) findViewById(R.id.total_money);
         mTotalAmountView.setText("" + mTotalAmount);
@@ -62,8 +65,10 @@ public class SummaryActivity extends Activity {
 
         mListView = (ListView) findViewById(R.id.listView);
 
+        //Running the algorithm
         complex.calculateTransactions((ArrayList<Person>) personList);
 
+        //Setting up the adapter, passing the list of transactions
         mAdapter = new TransactionsAdapter(getApplicationContext(),complex.getTransactions1());
         mListView.setAdapter(mAdapter);
 
@@ -71,7 +76,10 @@ public class SummaryActivity extends Activity {
 
 
 
-        //Summarize Button
+        /*Send sms Button, pressing it sends text messages to all the people
+        who the algorithm determined owes money telling them how much they owe, to whom
+        aswell as a link to mobilepay in the appstore/google play store.
+        */
         final Button mSendButton = (Button) findViewById(R.id.notify_button);
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +97,7 @@ public class SummaryActivity extends Activity {
             }
 
         });
-        //Back button
+        //Back button, this button returns to the overview in MainActivity using the finish method.
         final Button mBackButton = (Button) findViewById(R.id.back_button);
         mBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +118,7 @@ public class SummaryActivity extends Activity {
 
     }
     public void sendSMS (String phonenumber, String message) {
+        //TODO: Fjern system outs
         System.out.println("sendSMS has started " + phonenumber);
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(phonenumber, null, message, null, null);

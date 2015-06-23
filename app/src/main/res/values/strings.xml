@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">OwesMoneyApp</string>
+    <string name="app_name">WhoOwesWho</string>
 
     <string name="add_new_billing">Click here to add a new billing</string>
     <string name="action_settings">Settings</string>

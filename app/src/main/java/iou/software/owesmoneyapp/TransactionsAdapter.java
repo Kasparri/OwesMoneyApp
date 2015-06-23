@@ -29,16 +29,18 @@ public class TransactionsAdapter extends ArrayAdapter<Transactions> {
         final CheckBox checkBox;
         TextView textView;
         if (convertView==null) {
+            //First time setup
             convertView = inflater.inflate(R.layout.row_item, null);
             textView = (TextView) convertView.findViewById(R.id.rowTextView);
             checkBox = (CheckBox) convertView.findViewById(R.id.rowCheckBox);
             convertView.setTag(new TransactionsViewHolder(textView,checkBox));
-
         } else {
+            //If its been setup before we can use its previous configurations
             TransactionsViewHolder viewHolder = (TransactionsViewHolder) convertView.getTag();
             checkBox=viewHolder.getCheckBox();
             textView=viewHolder.getTextView();
         }
+        //Sets it so you can check the checkbox by clicking the whole row
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
