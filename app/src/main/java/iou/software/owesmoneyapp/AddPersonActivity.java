@@ -102,7 +102,7 @@ public class AddPersonActivity extends Activity {
                 String whereCondition = ContactsContract.Data.MIMETYPE + " = '" +   ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE + "'";
                 String[] projection = new String[]{ContactsContract.Data.DISPLAY_NAME,ContactsContract.Data.DATA1};
                 String sortOrder = ContactsContract.Data.DISPLAY_NAME;
-                cursorNames = content.query(ContactsContract.Data.CONTENT_URI,projection,whereCondition,null,sortOrder);
+                cursorNames = content.query(data.getData(),projection,whereCondition,null,sortOrder);
                 if (cursorNames.moveToFirst()) {
                     String phoneNumber = cursorNames.getString(cursorNames.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                     String name = cursorNames.getString(cursorNames.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
