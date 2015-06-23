@@ -38,9 +38,9 @@ public class AddPersonActivity extends Activity {
 
 
         //Getting the EditText views
-        mName = (EditText)findViewById(R.id.enter_name);
-        mNumber = (EditText)findViewById(R.id.enter_number);
-        mAmountPaid = (EditText)findViewById(R.id.enter_amount_paid);
+        mName = (EditText) findViewById(R.id.enter_name);
+        mNumber = (EditText) findViewById(R.id.enter_number);
+        mAmountPaid = (EditText) findViewById(R.id.enter_amount_paid);
 
         final Gson gson = new Gson();
 
@@ -55,7 +55,7 @@ public class AddPersonActivity extends Activity {
                 String emptyString = "";
 
                 //Getting strings from TextEdits and checks if data is inserted.
-                if (!(mName.getText().toString().equals(emptyString))  && !(mNumber.getText().toString().equals(emptyString))
+                if (!(mName.getText().toString().equals(emptyString)) && !(mNumber.getText().toString().equals(emptyString))
                         && !(mAmountPaid.getText().toString().equals(emptyString))) {
 
                     String name = mName.getText().toString();
@@ -66,14 +66,16 @@ public class AddPersonActivity extends Activity {
                     int amountPaid = Integer.parseInt(amountPaidString);
 
 
+                    // Kasper
                     // packages an intent with the data acquired
+
                     Intent data = new Intent();
-                    Person.packageIntent(data,name,number,amountPaid);
+                    Person.packageIntent(data, name, number, amountPaid);
                     setResult(RESULT_OK, data);
 
                     finish();
 
-                }else {
+                } else {
                     //Tells user to fill in all fields in case the user didn't.
                     Toast.makeText(getApplicationContext(), R.string.add_person_toast_message, Toast.LENGTH_LONG).show();
                 }
@@ -90,9 +92,8 @@ public class AddPersonActivity extends Activity {
         });
 
 
-
-
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -105,18 +106,10 @@ public class AddPersonActivity extends Activity {
                 String phonenumber = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                 String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
                 mName.setText(name, TextView.BufferType.EDITABLE);
-                mNumber.setText(phonenumber,TextView.BufferType.EDITABLE);
+                mNumber.setText(phonenumber, TextView.BufferType.EDITABLE);
             }
         }
     }
-
-
-
-
-
-
-
-
 
 
 }

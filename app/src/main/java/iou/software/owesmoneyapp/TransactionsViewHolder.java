@@ -9,13 +9,15 @@ import android.widget.TextView;
  */
 
 public class TransactionsViewHolder {
-    private CheckBox checkBox ;
-    private TextView textView ;
+    private CheckBox checkBox;
+    private TextView textView;
 
-    public TransactionsViewHolder() {}
+    public TransactionsViewHolder() {
+    }
+
     public TransactionsViewHolder(TextView textView, CheckBox checkBox) {
-        this.checkBox=checkBox;
-        this.textView=textView;
+        this.checkBox = checkBox;
+        this.textView = textView;
     }
 
     public CheckBox getCheckBox() {

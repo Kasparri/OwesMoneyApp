@@ -61,7 +61,7 @@ public class SummaryActivity extends Activity {
         mAverageAmountView = (TextView) findViewById(R.id.average_money);
         mAverageAmountView.setText("" + mAverageAmount);
 
-        mSeperatorView = (View) findViewById(R.id.seperator);
+        mSeperatorView = findViewById(R.id.seperator);
 
         mListView = (ListView) findViewById(R.id.listView);
 
@@ -75,7 +75,6 @@ public class SummaryActivity extends Activity {
 
 
 
-
         /*Send sms Button, pressing it sends text messages to all the people
         who the algorithm determined owes money telling them how much they owe, to whom
         aswell as a link to mobilepay in the appstore/google play store.
@@ -85,9 +84,9 @@ public class SummaryActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //Iterate over every person sending an sms to each one
-                for (int i=0;i<complex.getTransactions1().size();i++) {
+                for (int i = 0; i < complex.getTransactions1().size(); i++) {
                     String phonenumber = complex.getTransactions1().get(i).getOwes().getPhoneNumber();
-                    String message = complex.getTransactionStrings().get(i)+" (  " + complex.getTransactions1().get(i).getTakes().getPhoneNumber()+"  )";
+                    String message = complex.getTransactionStrings().get(i) + " (  " + complex.getTransactions1().get(i).getTakes().getPhoneNumber() + "  )";
                     String message2 = " MobilePay for Android: https://goo.gl/eWx9eo";
                     String message3 = " MobilePay for iPhone: https://goo.gl/pMCTVS";
 
