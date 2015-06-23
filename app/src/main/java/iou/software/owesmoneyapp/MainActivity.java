@@ -7,10 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.content.SharedPreferences;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,7 +51,8 @@ public class MainActivity extends ListActivity {
 
         // preperations for gson array
         SharedPreferences pManager = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        billings = gson.fromJson(pManager.getString("BILLING","[]"), new TypeToken<List<Person>>() {}.getType());
+        billings = gson.fromJson(pManager.getString("BILLING", "[]"), new TypeToken<List<Person>>() {
+        }.getType());
 
 
         mContext = getApplicationContext();
@@ -105,13 +104,13 @@ public class MainActivity extends ListActivity {
 
                         // sets a default name, if no name is entered
 
-                        if (titleName.getText().toString().isEmpty()){
+                        if (titleName.getText().toString().isEmpty()) {
                             titleName.setText(R.string.popup_default_name);
                         }
 
                         // starts Overview of Billing activity
 
-                        Intent intent = new Intent(MainActivity.this, OverviewOfBillingActivity.class);
+                        Intent intent = new Intent(MainActivity.this, AddBillingActivity.class);
                         intent.putExtra(TITLE, titleName.getText().toString());
                         startActivityForResult(intent, ADD_BILLING_ITEM_REQUEST);
                     }
@@ -134,7 +133,6 @@ public class MainActivity extends ListActivity {
                 popup.show();
 
 
-
             }
         });
 
@@ -146,13 +144,13 @@ public class MainActivity extends ListActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == ADD_BILLING_ITEM_REQUEST && resultCode == RESULT_OK){
+        if (requestCode == ADD_BILLING_ITEM_REQUEST && resultCode == RESULT_OK) {
 
             // getting the JSON string from the intent
             String json = data.getStringExtra(JSON);
 
             // retrieving the billing from the JSON string
-            Billing billing = new Gson().fromJson(json,Billing.class);
+            Billing billing = new Gson().fromJson(json, Billing.class);
 
             // adding the billing to the view
             mAdapter.add(billing);
@@ -161,7 +159,7 @@ public class MainActivity extends ListActivity {
             Intent toSummary = new Intent(MainActivity.this, SummaryActivity.class);
 
             // adds the json string to the intent
-            toSummary.putExtra(JSON,json);
+            toSummary.putExtra(JSON, json);
 
             // starts the summary activity with the 'toSummary' intent
             startActivity(toSummary);
@@ -197,7 +195,7 @@ public class MainActivity extends ListActivity {
 
     }
 
-    private void updateView(){
+    private void updateView() {
         mAdapter.notifyDataSetChanged();
     }
 
@@ -294,12 +292,24 @@ public class MainActivity extends ListActivity {
             });
 
             final Button deleteButton = (Button) itemLayout.findViewById(R.id.delete_billing);
-            deleteButton.setOnClickListener(new View.OnClickListener(){
+            deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v){
+                public void onClick(View v) {
 
-                    Toast.makeText(mContext,billing.getTitle() + " was removed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, billing.getTitle() + " was removed", Toast.LENGTH_SHORT).show();
                     mAdapter.remove(billing);
+
+                }
+            });
+
+
+            final Button editButton = (Button) itemLayout.findViewById(R.id.edit_billing);
+            editButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(mContext, R.string.yet_to_be_added, Toast.LENGTH_SHORT).show();
+
 
                 }
             });

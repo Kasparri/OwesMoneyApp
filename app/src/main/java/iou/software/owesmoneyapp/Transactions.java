@@ -9,7 +9,7 @@ public class Transactions {
     private Person takes, owes;
     private int transaction;
 
-    public Transactions(Person owes, Person takes , int transaction){
+    public Transactions(Person owes, Person takes, int transaction) {
         this.owes = owes;
         this.takes = takes;
         this.transaction = transaction;

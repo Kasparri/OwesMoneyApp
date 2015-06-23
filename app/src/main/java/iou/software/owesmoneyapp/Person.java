@@ -21,10 +21,10 @@ public class Person implements Comparable {
         this.amountPaid = amountPaid;
     }
 
-    public Person(Intent intent){
+    public Person(Intent intent) {
         personName = intent.getStringExtra(NAME);
         phoneNumber = intent.getStringExtra(NUMBER);
-        amountPaid = intent.getIntExtra(AMOUNT,0);
+        amountPaid = intent.getIntExtra(AMOUNT, 0);
     }
 
     public String toString() {
@@ -63,6 +63,9 @@ public class Person implements Comparable {
     public void setAmountPaid(int amountPaid) {
         this.amountPaid = amountPaid;
     }
+
+    // Kasper
+    // packages the intent with a name, phone number and the amount paid
 
     public static void packageIntent(Intent intent, String personName, String phoneNumber, int amountPaid) {
 

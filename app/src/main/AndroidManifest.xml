@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OverviewOfBillingActivity" >
+        <activity android:name=".AddBillingActivity" >
         </activity>
         <activity android:name=".AddPersonActivity" >
         </activity>

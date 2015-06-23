@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -27,13 +26,11 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OverviewOfBillingActivity extends Activity {
+public class AddBillingActivity extends Activity {
 
-    private static final String TAG = "ActivityOverview";
     public final static String TITLE = "title";
 
     private static final int ADD_PERSON_REQUEST = 1;
@@ -63,7 +60,7 @@ public class OverviewOfBillingActivity extends Activity {
         setContentView(R.layout.activity_overview);
 
         //Preperations for gson array
-        pManager = PreferenceManager.getDefaultSharedPreferences(OverviewOfBillingActivity.this);
+        pManager = PreferenceManager.getDefaultSharedPreferences(AddBillingActivity.this);
         billings = gson.fromJson(pManager.getString("BILLING", "[]"), new TypeToken<List<Billing>>() {
         }.getType());
 
@@ -92,10 +89,6 @@ public class OverviewOfBillingActivity extends Activity {
         // Put divider between personItems and FooterView
         mListView.setFooterDividersEnabled(true);
 
-        //Load
-        if (mAdapter.getCount() == 0) {
-            loadItems();
-        }
 
         //  - Inflate footerView for overview_footer_view.xml_view.xml file
 
@@ -111,7 +104,7 @@ public class OverviewOfBillingActivity extends Activity {
             public void onClick(View v) {
 
                 // - Implement OnClick().
-                Intent addIntent = new Intent(OverviewOfBillingActivity.this, AddPersonActivity.class);
+                Intent addIntent = new Intent(AddBillingActivity.this, AddPersonActivity.class);
                 startActivityForResult(addIntent, ADD_PERSON_REQUEST);
             }
         });
@@ -130,7 +123,7 @@ public class OverviewOfBillingActivity extends Activity {
                 // if there is none, show a toast
                 // if there is any added, go to the summary activity
 
-                if (mAdapter.getPersons().isEmpty() || mAdapter.getCount() ==1) {
+                if (mAdapter.getPersons().isEmpty() || mAdapter.getCount() == 1) {
                     Toast.makeText(getApplicationContext(), R.string.no_persons_toast, Toast.LENGTH_LONG).show();
                 } else {
 
@@ -159,12 +152,6 @@ public class OverviewOfBillingActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == ADD_PERSON_REQUEST && resultCode == RESULT_OK) {
-            Log.i(TAG, "Entered onActivityResult()");
-
-            /*Person item = new Person("Peter", "444444", 190);
-            for(int i = 0; i < 3 ; i++){
-                mAdapter.add(item);
-            }*/
 
             Person person = new Person(data);
 
@@ -172,8 +159,6 @@ public class OverviewOfBillingActivity extends Activity {
 
             updateTotalAndAverageAmounts();
 
-            Log.i(TAG, "Ending onActivityResult()");
-            Log.i(TAG, "" + mAdapter.getCount());
         }
     }
 
@@ -190,8 +175,6 @@ public class OverviewOfBillingActivity extends Activity {
             mAverageAmount = mTotalAmount / mAdapter.getCount();
         }
 
-        Log.i("TAG", "" + mAdapter.getCount());
-
         //Update the views
         mTotalAmountView.setText("" + mTotalAmount);
         mAverageAmountView.setText("" + mAverageAmount);
@@ -199,25 +182,12 @@ public class OverviewOfBillingActivity extends Activity {
 
     @Override
     public void onResume() {
+
         super.onResume();
-        // Load saved PersonItems, if necessary
-
-        if (mAdapter.getCount() == 0) {
-            loadItems();
-        }
-
         updateTotalAndAverageAmounts();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        // Save PersonItems
-
-        saveItems();
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -232,11 +202,9 @@ public class OverviewOfBillingActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_DELETE:
-                Log.i(TAG, "Cleared");
                 mAdapter.clear();
                 return true;
             case MENU_BACK:
-                Log.i(TAG, "Went Back");
                 setResult(RESULT_CANCELED);
                 finish();
                 return true;
@@ -245,17 +213,6 @@ public class OverviewOfBillingActivity extends Activity {
         }
     }
 
-    // Load stored PersonItems
-    private void loadItems() {
-        Log.i(TAG, "Loaded items");
-
-    }
-
-    // Save PersonItems to file
-    private void saveItems() {
-
-
-    }
 
     //PersonListAdapter
 
@@ -264,8 +221,6 @@ public class OverviewOfBillingActivity extends Activity {
         private final ArrayList<Person> persons = new ArrayList<>();
         private final Context mContext;
         private static final int ADD_PERSON_REQUEST = 1;
-
-        private static final String TAG = "ActivityOverview";
 
         public PersonListAdapter(Context context) {
 
@@ -364,10 +319,7 @@ public class OverviewOfBillingActivity extends Activity {
                 public void onClick(View v) {
 
                     // - Implement OnClick().
-                    Intent addIntent = new Intent(OverviewOfBillingActivity.this, AddPersonActivity.class);
-                    startActivityForResult(addIntent, ADD_PERSON_REQUEST);
-
-                    Log.i(TAG, "onClick for the edit button");
+                    Toast.makeText(mContext, R.string.yet_to_be_added, Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -380,7 +332,6 @@ public class OverviewOfBillingActivity extends Activity {
                 public void onClick(View v) {
 
                     remove(person);
-                    Log.i(TAG, "onClick for the delete button");
 
                 }
             });

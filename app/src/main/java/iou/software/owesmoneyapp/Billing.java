@@ -38,7 +38,7 @@ public class Billing {
         return title;
     }
 
-    public List<Person> getPersons(){
+    public List<Person> getPersons() {
         return persons;
     }
 
@@ -47,6 +47,8 @@ public class Billing {
     }
 
 
+    // packages the intent with a title and a status
+
     public static void packageIntent(Intent intent, String title, boolean status) {
 
         intent.putExtra(TITLE, title);
@@ -54,10 +56,11 @@ public class Billing {
 
     }
 
+    // packages the intent with a JSON string
 
     public static void packageIntent(Intent intent, String json) {
 
-        intent.putExtra(JSON,json);
+        intent.putExtra(JSON, json);
 
     }
 
