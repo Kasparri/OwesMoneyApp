@@ -110,7 +110,6 @@ public class AddPersonActivity extends Activity {
                     mNumber.setText(phoneNumber, TextView.BufferType.EDITABLE);
                 }
             }
-
         }
     }
 
