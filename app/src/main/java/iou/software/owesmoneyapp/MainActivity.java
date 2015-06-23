@@ -293,22 +293,16 @@ public class MainActivity extends ListActivity {
 
             });
 
-
-
             final Button deleteButton = (Button) itemLayout.findViewById(R.id.delete_billing);
             deleteButton.setOnClickListener(new View.OnClickListener(){
-
                 @Override
                 public void onClick(View v){
 
                     Toast.makeText(mContext,billing.getTitle() + " was removed", Toast.LENGTH_SHORT).show();
                     mAdapter.remove(billing);
 
-
                 }
-
             });
-
 
 
             final CheckBox billingStatus = (CheckBox) itemLayout.findViewById(R.id.billing_checkbox);

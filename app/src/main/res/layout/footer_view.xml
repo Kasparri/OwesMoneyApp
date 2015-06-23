@@ -5,8 +5,8 @@
     android:id="@+id/add_new_billing"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="50dp"
     android:gravity="center_horizontal"
     android:text="@string/add_new_billing"
-    android:textSize="20dp"/>
+    android:textSize="25dp"/>
 
