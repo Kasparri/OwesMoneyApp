@@ -86,11 +86,11 @@ public class SummaryActivity extends Activity {
                 //Iterate over every person sending an sms to each one
                 for (int i = 0; i < complex.getTransactions1().size(); i++) {
                     String phoneNumber = complex.getTransactions1().get(i).getOwes().getPhoneNumber();
-                    String message = complex.getTransactionStrings().get(i) + " (  " + complex.getTransactions1().get(i).getTakes().getPhoneNumber() + "  )";
-                    String message2 = " MobilePay for Android: https://goo.gl/eWx9eo";
-                    String message3 = " MobilePay for iPhone: https://goo.gl/pMCTVS";
-
-                    sendSMS(phoneNumber, message + message2 + message3);
+                    String message = complex.getTransactionStrings().get(i) + "     " + complex.getTransactions1().get(i).getTakes().getPhoneNumber();
+                    String android = " MobilePay for Android: https://goo.gl/eWx9eo";
+                    String IOS = " MobilePay for iPhone: https://goo.gl/pMCTVS";
+                    Toast.makeText(getApplicationContext(),"Sending sms",Toast.LENGTH_LONG).show();
+                    sendSMS(phoneNumber, message + android + IOS);
 
                 }
             }

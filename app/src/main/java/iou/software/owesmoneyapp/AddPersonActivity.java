@@ -99,15 +99,20 @@ public class AddPersonActivity extends Activity {
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
                 ContentResolver content = getContentResolver();
-                String whereCondition = ContactsContract.Data.MIMETYPE + " = '" +   ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE + "'";
-                String[] projection = new String[]{ContactsContract.Data.DISPLAY_NAME,ContactsContract.Data.DATA1};
-                String sortOrder = ContactsContract.Data.DISPLAY_NAME;
-                cursorNames = content.query(data.getData(),projection,whereCondition,null,sortOrder);
+                String[] projection = new String[]{ContactsContract.Contacts.DISPLAY_NAME,ContactsContract.Contacts._ID};
+                cursorNames = content.query(data.getData(),projection,null,null,null);
                 if (cursorNames.moveToFirst()) {
-                    String phoneNumber = cursorNames.getString(cursorNames.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                     String name = cursorNames.getString(cursorNames.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                    String contactID = cursorNames.getString(cursorNames.getColumnIndex(ContactsContract.CommonDataKinds.Phone._ID));
                     mName.setText(name, TextView.BufferType.EDITABLE);
-                    mNumber.setText(phoneNumber, TextView.BufferType.EDITABLE);
+
+                    cursorNumbers = content.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID+" = " + contactID,null,null);
+                    if(cursorNumbers.moveToFirst()) {
+                        String phoneNumber = cursorNumbers.getString(cursorNumbers.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        mNumber.setText(phoneNumber, TextView.BufferType.EDITABLE);
+
+                    }
+
                 }
             }
         }
