@@ -118,12 +118,8 @@ public class SummaryActivity extends Activity {
 
     }
     public void sendSMS (String phonenumber, String message) {
-        //TODO: Fjern system outs
-        System.out.println("sendSMS has started " + phonenumber);
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(phonenumber, null, message, null, null);
-        System.out.println("sendSMS is finished");
-
     }
 
     @Override

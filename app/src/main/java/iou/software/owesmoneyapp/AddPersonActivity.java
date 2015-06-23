@@ -99,7 +99,7 @@ public class AddPersonActivity extends Activity {
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
                 String[] projection = new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER,ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME};
-                cursor = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,projection,null,null,null);
+                cursor = getContentResolver().query(data.getData(),projection,null,null,null);
             }
             if (cursor.moveToFirst()) {
                 String phonenumber = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
