@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:text="@string/add_new_person_to_billing_string"
-    android:textSize="20sp"
+    android:textSize="30sp"
     android:gravity="center">
 
 </TextView>
