@@ -18,7 +18,7 @@
             android:layout_width="174dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/Title"
+            android:id="@+id/TitleView"
             android:text="Title"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
