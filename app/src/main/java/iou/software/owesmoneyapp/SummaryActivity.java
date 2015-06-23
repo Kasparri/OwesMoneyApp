@@ -77,7 +77,7 @@ public class SummaryActivity extends Activity {
 
         /*Send sms Button, pressing it sends text messages to all the people
         who the algorithm determined owes money telling them how much they owe, to whom
-        aswell as a link to mobilepay in the appstore/google play store.
+        aswell as a link to MobilePay in the AppStore/Google play store.
         */
         final Button mSendButton = (Button) findViewById(R.id.notify_button);
         mSendButton.setOnClickListener(new View.OnClickListener() {
@@ -85,12 +85,12 @@ public class SummaryActivity extends Activity {
             public void onClick(View v) {
                 //Iterate over every person sending an sms to each one
                 for (int i = 0; i < complex.getTransactions1().size(); i++) {
-                    String phonenumber = complex.getTransactions1().get(i).getOwes().getPhoneNumber();
+                    String phoneNumber = complex.getTransactions1().get(i).getOwes().getPhoneNumber();
                     String message = complex.getTransactionStrings().get(i) + " (  " + complex.getTransactions1().get(i).getTakes().getPhoneNumber() + "  )";
                     String message2 = " MobilePay for Android: https://goo.gl/eWx9eo";
                     String message3 = " MobilePay for iPhone: https://goo.gl/pMCTVS";
 
-                    sendSMS(phonenumber, message + message2 + message3);
+                    sendSMS(phoneNumber, message + message2 + message3);
 
                 }
             }
@@ -116,9 +116,9 @@ public class SummaryActivity extends Activity {
         return true;
 
     }
-    public void sendSMS (String phonenumber, String message) {
+    public void sendSMS (String phoneNumber, String message) {
         SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage(phonenumber, null, message, null, null);
+        sms.sendTextMessage(phoneNumber, null, message, null, null);
     }
 
     @Override

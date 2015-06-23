@@ -99,15 +99,16 @@ public class AddPersonActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
-                String[] projection = new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER,ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME};
+                String[] projection = new String[]{ContactsContract.Contacts.DISPLAY_NAME};
                 cursor = getContentResolver().query(data.getData(),projection,null,null,null);
+                if (cursor.moveToFirst()) {
+                    //String phoneNumber = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                    String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                    mName.setText(name, TextView.BufferType.EDITABLE);
+                    //mNumber.setText(phoneNumber, TextView.BufferType.EDITABLE);
+                }
             }
-            if (cursor.moveToFirst()) {
-                String phonenumber = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-                mName.setText(name, TextView.BufferType.EDITABLE);
-                mNumber.setText(phonenumber, TextView.BufferType.EDITABLE);
-            }
+
         }
     }
 
